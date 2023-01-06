@@ -19,7 +19,6 @@ class Tweets(Dataset):
         self.train = train
 
         if self.out_folder: # try loading the preprocessed data 
-            print("inside trying to load ")
             try: 
                 self.load_preprocessed()
                 print("Loaded the pre-processed files")
