@@ -1,4 +1,4 @@
-tweet_classification
+MLOps Project Description - Tweet Classification of Trump and Russian Troll Tweets
 ==============================
 
 ### Overall goal of the project
@@ -11,7 +11,7 @@ The input for our models is going to be text strings, thus Transformer framework
 The Transformer framework provide various pre-trained model and we will be selecting one of these to be the basis of our model. This will be included in our cookie cutter approach. 
 
 ### What data are you going to run on (initially, may change)
-The data we have selected is twits from two different Kaggle sources [Trump tweets](https://www.kaggle.com/datasets/austinreese/trump-tweets?resource=download) and [Russian troll tweets](https://www.kaggle.com/datasets/vikasg/russian-troll-tweets?select=tweets.csv). 
+The data we have selected is tweets from two different Kaggle sources [Trump tweets](https://www.kaggle.com/datasets/austinreese/trump-tweets?resource=download) and [Russian troll tweets](https://www.kaggle.com/datasets/vikasg/russian-troll-tweets?select=tweets.csv). For each dataset we will include just the tweet and the date of the tweet. Initially we will only use the tweet (text) for the model. Then we will add a label to each tweet whether Trump or a Russian Troll is the author, based on which dataset the tweet comes from.   
 
 ### What deep learning models do you expect to use
 We expect to used BERT model with focus on [BERT-base-uncased]([bert-base-uncased](https://huggingface.co/bert-base-uncased)), but if we have time, we will also checkout [BERTweet-base](https://huggingface.co/vinai/bertweet-base) which is trained on twitter data. 
@@ -69,3 +69,6 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+## Checklist and report
+See [reports/README.md](https://github.com/MiaMiya/tweet_classification/tree/main/reports)
