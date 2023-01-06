@@ -11,12 +11,11 @@ import numpy as np
 from torch.utils.data import Dataset 
 
 class Tweets(Dataset):
-    def __init__(self, train: bool, in_folder: str = "", out_folder: str = "") -> None:
+    def __init__(self, in_folder: str = "", out_folder: str = "") -> None:
         super().__init__()
         
         self.in_folder = in_folder
         self.out_folder = out_folder
-        self.train = train
 
         if self.out_folder: # try loading the preprocessed data 
             try: 
@@ -88,7 +87,7 @@ def main(input_filepath, output_filepath):
     logger.info('making final data set from raw data')
 
     # Load data
-    data_set = Tweets(train=True, in_folder=input_filepath, out_folder=output_filepath)
+    data_set = Tweets(in_folder=input_filepath, out_folder=output_filepath)
     data_set.save_preprocessed()
 
     print(data_set.train_tweet.shape)
