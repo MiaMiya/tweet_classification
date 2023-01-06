@@ -8,13 +8,13 @@ The goal of our project is to classify if a tweet was made by Trump or a Russian
 The input for our models is going to be text strings, thus Transformer framework will be used.
 
 ### How to you intend to include the framework into your project
-The Transformer framework provide various pretrained model and we will be selecting one of these to be the basis of our model. This will be included in our cookie cutter approach. 
+The Transformer framework provide various pre-trained model and we will be selecting one of these to be the basis of our model. This will be included in our cookie cutter approach. 
 
 ### What data are you going to run on (initially, may change)
 The data we have selected is twits from two different Kaggle sources [Trump tweets](https://www.kaggle.com/datasets/austinreese/trump-tweets?resource=download) and [Russian troll tweets](https://www.kaggle.com/datasets/vikasg/russian-troll-tweets?select=tweets.csv). 
 
 ### What deep learning models do you expect to use
-We expect to used BERT model with focus on BERT-base, but if we have time, we will also checkout BERTweet-base which is trained on twitter data. 
+We expect to used BERT model with focus on [BERT-base-uncased]([bert-base-uncased](https://huggingface.co/bert-base-uncased)), but if we have time, we will also checkout [BERTweet-base](https://huggingface.co/vinai/bertweet-base) which is trained on twitter data. 
 
 
 Project Organization
