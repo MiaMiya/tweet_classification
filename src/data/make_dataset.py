@@ -66,7 +66,7 @@ class Tweets(Dataset):
             raise ValueError("No preprocessed files found")
 
     def save_preprocessed(self):
-        np.save(self.out_folder + '/train_processed.npy', np.stack((self.train_tweet, self.train_tweet)), allow_pickle=True)
+        np.save(self.out_folder + '/train_processed.npy', np.stack((self.train_tweet, self.train_label)), allow_pickle=True)
         np.save(self.out_folder + '/test_processed.npy', np.stack((self.test_tweet, self.test_label)), allow_pickle=True)
 
     # def __len__(self):
