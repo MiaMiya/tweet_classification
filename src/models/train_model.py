@@ -69,7 +69,7 @@ def train(
                 outputs = model(
                     input_ids=batch['input_ids'],
                     attention_mask=batch['attention_mask'],
-                    # label=batch['label']
+                    label=batch['label']
                 )
 
                 log_probs = outputs.logits[0] ## input CR
