@@ -76,7 +76,7 @@ def train(
                 log_probs = outputs.logits[0] ## input CR
 
                 if device == torch.cuda.is_available():
-                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()])<0.5,batch['label'])
+                    acc_batch = accuracy(log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()<0.5,batch['label'])
                 else: 
                     acc_batch = accuracy(log_probs.softmax(dim=-1).detach().flatten().numpy()<0.5,batch['label'])
                 acc.append(acc_batch)
