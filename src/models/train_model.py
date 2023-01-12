@@ -7,11 +7,12 @@ import torch
 import matplotlib.pyplot as plt 
 from torch import nn, optim
 from torch.optim.lr_scheduler import LambdaLR
-from torch.utils.data import Dataset,DataLoader
+from torch.utils.data import DataLoader
 from transformers import AdamW
 from transformers import get_linear_schedule_with_warmup
 from sklearn import metrics
 from tqdm import tqdm
+from datasets import Dataset
 
 from src.models.model import get_model
 from src.data.make_dataset import Tweets
@@ -108,6 +109,7 @@ def train_main(lr, epoch, batch_size):
     print(epoch)
     print(batch_size)
 
+    
     # Load model 
     model = get_model()
 
@@ -120,8 +122,10 @@ def train_main(lr, epoch, batch_size):
 
     # Load data
     data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
+    #print(data_set.train_tweet)
+    print(data_set.train_label)
     data_set = Dataset.from_dict({'text':data_set.train_tweet, 'label':data_set.train_label})
-
+    
     # Process the data by tokenizing it
     tokenized_dataset = data_set['train'].map(tokenize_function, batched=True, remove_columns=data_set['train'].column_names)
     trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size)
