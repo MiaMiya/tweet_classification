@@ -13,14 +13,9 @@ from transformers import get_linear_schedule_with_warmup
 from sklearn import metrics
 from tqdm import tqdm
 
-from src.models.model import get_model, get_tokenizer
+from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function
-
-@click.command()
-@click.option("--lr", default=1e-3, help='Learning rate to use for training')
-@click.option("--epoch", default=1, help='Number of epoch use for training')
-@click.option("--batch_size", default=2, help='Batch size for training')
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
@@ -103,8 +98,10 @@ def train(
 
     return losses, acc
 
-
-
+@click.command()
+@click.option("--lr", default=1e-3, help='Learning rate to use for training')
+@click.option("--epoch", default=1, help='Number of epoch use for training')
+@click.option("--batch_size", default=2, help='Batch size for training')
 def train_main(lr, epoch, batch_size):
     print("Training day and night")
     print(lr)
@@ -119,6 +116,7 @@ def train_main(lr, epoch, batch_size):
     if torch.cuda.is_available():
         device = torch.device("cuda")
     print(device)
+    model.to(device)
 
     # Load data
     data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
