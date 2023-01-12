@@ -38,6 +38,8 @@ class Tweets(Dataset):
         # Combine the two dataframe
         pd_combine = pd.concat([pd_Russian[['Tweet','Label']],pd_D_T[['Tweet','Label']]], ignore_index=True).reset_index(drop=True)
 
+        pd_combine.dropna(inplace=True)
+
         # Create train test split 
         Train, Test = train_test_split(pd_combine,
                                         random_state=104, 
