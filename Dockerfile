@@ -7,4 +7,4 @@ RUN apt update && \
 
 COPY requirements.txt requirements.txt
 WORKDIR /
-RUN pip install -r requirements.txt --no-cache-dir
+
