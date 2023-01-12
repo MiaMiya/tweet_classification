@@ -14,9 +14,4 @@ def collate_fn(inputs):
     attention_mask = torch.tensor([i['attention_mask'] for i in inputs])
     labels = torch.tensor([i['label'] for i in inputs])
 
-    # # Truncate to max length
-    # max_len = max(attention_mask.sum(-1))
-    # input_ids = input_ids[:,:max_len]
-    # attention_mask = attention_mask[:,:max_len]
-
-    return {'input_ids': input_ids, 'attention_mask': attention_mask, 'labels': labels}
+    return {'input_ids': input_ids, 'attention_mask': attention_mask, 'label': labels}

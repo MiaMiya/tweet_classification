@@ -14,6 +14,7 @@ from sklearn import metrics
 from tqdm import tqdm
 from datasets import Dataset
 import pandas as pd
+import pickle
 
 from src.models.model import get_model
 from src.data.make_dataset import Tweets
@@ -47,13 +48,12 @@ def train(
     for ep in range(n_epochs):
 
         loss_epoch = []
-        print("before with")
+
         with tqdm(train_dl, unit="batch") as tepoch:
-            print("before batch")
             #Iterate through each batch in the dataloader
             for batch in train_dl:
                 tepoch.set_description(f"Epoch {ep}")
-                print("inside batch")
+
                 # VERY IMPORTANT: Make sure the model is in training mode, which turns on 
                 # things like dropout and layer normalization
                 model.train()
@@ -65,23 +65,22 @@ def train(
 
                 # Place each tensor on the GPU
                 batch = {b: batch[b].to(device) for b in batch}
-                print("after send batch to device")
+
                 # Pass the inputs through the model, get the current loss and logits
-                print(batch)
-                print(batch['label'])
                 outputs = model(
                     input_ids=batch['input_ids'],
                     attention_mask=batch['attention_mask'],
-                    label=batch['label']
+                    labels=batch['label']
                 )
 
                 log_probs = outputs.logits[0] ## input CR
-                
+
                 if device == torch.cuda.is_available():
-                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()[0]])<0.5,batch['label'])
+                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()])<0.5,batch['label'])
                 else: 
-                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().flatten().numpy()[0]])<0.5,batch['label'])
+                    acc_batch = accuracy(log_probs.softmax(dim=-1).detach().flatten().numpy()<0.5,batch['label'])
                 acc.append(acc_batch)
+
 
                 loss = outputs['loss']
                 losses.append(loss.item())
@@ -126,12 +125,11 @@ def train_main(lr, epoch, batch_size):
 
     # Load data
     data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
-    #print(data_set.train_tweet)
-
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
 
     # Process the data by tokenizing it
-    tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=data_set.column_names)
+    tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=['text'])
+
     trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size, collate_fn=collate_fn)
 
     # Define parameters for scheduler
