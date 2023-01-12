@@ -32,58 +32,39 @@ def predict(
     :param device: The device to train on
     """
 
-    with 
-    model.eval()
+    with torch.no_grad():
+        model.eval()
 
-    # Keep track of the loss and best accuracy
-    losses = []
-    acc = []
+        # Keep track of the prediction and probability
+        prediction = []
+        probability = []
 
-    # Iterate through epochs
-    for ep in range(n_epochs):
+        for tweet in test_dl:
 
-        loss_epoch = []
+            # Place each tensor on the GPU
+            batch = {b: tweet[b].to(device) for b in tweet}
 
-        with tqdm(train_dl, unit="batch") as tepoch:
-            #Iterate through each batch in the dataloader
-            for batch in train_dl:
-                tepoch.set_description(f"Epoch {ep}")
+            # Pass the inputs through the model, get the current loss and logits
+            outputs = model(
+                input_ids=batch['input_ids'],
+                attention_mask=batch['attention_mask'])
 
-                # VERY IMPORTANT: Make sure the model is in training mode, which turns on 
-                # things like dropout and layer normalization
-                model.train()
+            log_probs = outputs.logits[0] ## input CR
 
-                # VERY IMPORTANT: zero out all of the gradients on each iteration -- PyTorch
-                # keeps track of these dynamically in its computation graph so you need to explicitly
-                # zero them out
-                optimizer.zero_grad()
-
-                # Place each tensor on the GPU
-                batch = {b: batch[b].to(device) for b in batch}
-
-                # Pass the inputs through the model, get the current loss and logits
-                outputs = model(
-                    input_ids=batch['input_ids'],
-                    attention_mask=batch['attention_mask'],
-                    labels=batch['label']
-                )
-
-                log_probs = outputs.logits[0] ## input CR
-
-                if device == torch.cuda.is_available():
-                    acc_batch = np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()])<0.5
-                else: 
-                    acc_batch = log_probs.softmax(dim=-1).detach().flatten().numpy()<0.5
-                acc.append(acc_batch)
-
-    torch.save(model.state_dict(), "models/my_trained_model.pt")
-
-    return losses, acc
+            if device == torch.cuda.is_available():
+                probs = log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()
+            else: 
+                probs = log_probs.softmax(dim=-1).detach().flatten().numpy()
+            
+            probability.append(probs)
+            prediction.append(probs < 0.5)
+            
+    return prediction, probability
 
 @click.command()
 @click.argument("model_checkpoint")
 @click.argument("data_to_predict")
-def predict(model_checkpoint, data_to_predict):
+def predict_main(model_checkpoint, data_to_predict):
     print("Evaluating until hitting the ceiling")
     print(model_checkpoint)
     
@@ -100,48 +81,24 @@ def predict(model_checkpoint, data_to_predict):
 
     # Load data
     data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
-    data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
+    data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.test_tweet, 'label':data_set.test_label}))
 
     # Process the data by tokenizing it
     tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=['text'])
 
-    trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size, collate_fn=collate_fn)
-
-    # Define parameters for scheduler
-    weight_decay = 0.01
-    warmup_steps = 250
-    
-    # Set optimzer for training model 
-    optimizer = AdamW(model.parameters(), lr=lr, betas=(0.9,0.98), eps=1e-6, weight_decay=weight_decay)
-    scheduler = get_linear_schedule_with_warmup(
-    optimizer,
-    warmup_steps,
-    epoch * len(trainloader))
+    trainloader = DataLoader(tokenized_dataset, collate_fn=collate_fn)
 
     # Train the model 
-    losses, acc = train(
+    prediction = predict(
     model, 
     trainloader,
-    optimizer, 
-    scheduler,
-    epoch, 
     device)
 
-    _, axis = plt.subplots(2)
-  
-    # For loss
-    axis[0].plot(losses,label="loss")
-    axis[0].set_title("Training loss")
-    axis[0].set_xlabel("iterations")
-    axis[0].set_ylabel("loss")
-    
-    # For accuracy
-    axis[1].plot(acc,label="accuracy")
-    axis[1].set_title("Training accuracy")
-    axis[0].set_xlabel("iterations")
-    axis[0].set_ylabel("loss")
-
-    plt.savefig(f"reports/figures/training_curve.png")
+    print("Predictions")
+    for i in range(prediction):
+        print(
+            f"tweet {i+1} predicted to be class {prediction[i].item()} with probability {probs[i, prediction[i]].item()}"
+        )
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
