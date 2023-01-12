@@ -11,14 +11,16 @@ from torch.utils.data import Dataset,DataLoader
 from transformers import AdamW
 from transformers import get_linear_schedule_with_warmup
 from sklearn import metrics
+from tqdm import tqdm
 
 from src.models.model import get_model, get_tokenizer
 from src.data.make_dataset import Tweets
+from src.data.helper import tokenize_function
 
 @click.command()
-@click.option("--lr", default=1e-3, help='learning rate to use for training')
+@click.option("--lr", default=1e-3, help='Learning rate to use for training')
 @click.option("--epoch", default=1, help='Number of epoch use for training')
-
+@click.option("--batch_size", default=2, help='Batch size for training')
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
@@ -31,108 +33,119 @@ def train(
     n_epochs: int, 
     device: torch.device,
 ):
-  """
-  The main training loop which will optimize a given model on a given dataset
-  :param model: The model being optimized
-  :param train_dl: The training dataset
-  :param optimizer: The optimizer used to update the model parameters
-  :param n_epochs: Number of epochs to train for
-  :param device: The device to train on
-  """
+    """
+    The main training loop which will optimize a given model on a given dataset
+    :param model: The model being optimized
+    :param train_dl: The training dataset
+    :param optimizer: The optimizer used to update the model parameters
+    :param n_epochs: Number of epochs to train for
+    :param device: The device to train on
+    """
 
-  # Keep track of the loss and best accuracy
-  losses = []
-  acc = []
+    # Keep track of the loss and best accuracy
+    losses = []
+    acc = []
 
-  # Iterate through epochs
-  for ep in range(n_epochs):
+    # Iterate through epochs
+    for ep in range(n_epochs):
 
-    loss_epoch = []
+        loss_epoch = []
+        with tqdm(train_dl, unit="batch") as tepoch:
 
-    #Iterate through each batch in the dataloader
-    for batch in train_dl:
-        # VERY IMPORTANT: Make sure the model is in training mode, which turns on 
-        # things like dropout and layer normalization
-        model.train()
+            #Iterate through each batch in the dataloader
+            for batch in train_dl:
+                tepoch.set_description(f"Epoch {ep}")
 
-        # VERY IMPORTANT: zero out all of the gradients on each iteration -- PyTorch
-        # keeps track of these dynamically in its computation graph so you need to explicitly
-        # zero them out
-        optimizer.zero_grad()
+                # VERY IMPORTANT: Make sure the model is in training mode, which turns on 
+                # things like dropout and layer normalization
+                model.train()
 
-        # Place each tensor on the GPU
-        batch = {b: batch[b].to(device) for b in batch}
+                # VERY IMPORTANT: zero out all of the gradients on each iteration -- PyTorch
+                # keeps track of these dynamically in its computation graph so you need to explicitly
+                # zero them out
+                optimizer.zero_grad()
 
-        # Pass the inputs through the model, get the current loss and logits
-        outputs = model(
-            input_ids=batch['input_ids'],
-            attention_mask=batch['attention_mask'],
-            start_positions=batch['start_tokens'],
-            end_positions=batch['end_tokens']
-        )
+                # Place each tensor on the GPU
+                batch = {b: batch[b].to(device) for b in batch}
 
-        log_probs = outputs.logits[0] ## input CR
-        
-        if device == torch.cuda.is_available():
-            acc.append(accuracy(np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()[0]])<0.5,batch['label']))
-        else: 
-            acc.append(accuracy(np.array([log_probs.softmax(dim=-1).detach().flatten().numpy()[0]])<0.5,batch['label']))
+                # Pass the inputs through the model, get the current loss and logits
+                outputs = model(
+                    input_ids=batch['input_ids'],
+                    attention_mask=batch['attention_mask'],
+                    # label=batch['label']
+                )
 
-        loss = outputs['loss']
-        losses.append(loss.item())
-        loss_epoch.append(loss.item())
+                log_probs = outputs.logits[0] ## input CR
+                
+                if device == torch.cuda.is_available():
+                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()[0]])<0.5,batch['label'])
+                else: 
+                    acc_batch = accuracy(np.array([log_probs.softmax(dim=-1).detach().flatten().numpy()[0]])<0.5,batch['label'])
+                acc.append(acc_batch)
 
-        # Calculate all of the gradients and weight updates for the model
-        loss.backward()
-        # Optional: clip gradients
-        #torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                loss = outputs['loss']
+                losses.append(loss.item())
+                loss_epoch.append(loss.item())
 
-        # Finally, update the weights of the model and advance the LR schedule
-        optimizer.step()
-        scheduler.step()
-        #gc.collect()
+                # Calculate all of the gradients and weight updates for the model
+                loss.backward()
+                # Optional: clip gradients
+                #torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+
+                # Finally, update the weights of the model and advance the LR schedule
+                optimizer.step()
+                scheduler.step()
+                #gc.collect()
+            
+                tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
     torch.save(model.state_dict(), "models/my_trained_model.pt")
 
-  return losses, acc
+    return losses, acc
 
 
 
-def train_main(lr):
+def train_main(lr, epoch, batch_size):
     print("Training day and night")
     print(lr)
+    print(epoch)
+    print(batch_size)
 
+    # Load model 
     model = get_model()
-    tokenizer = get_tokenizer()
+
+    # Define device cpu or gpu
     device = torch.device("cpu")
     if torch.cuda.is_available():
         device = torch.device("cuda")
     print(device)
 
+    # Load data
     data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
+    data_set = Dataset.from_dict({'text':data_set.train_tweet, 'label':data_set.train_label})
 
+    # Process the data by tokenizing it
+    tokenized_dataset = data_set['train'].map(tokenize_function, batched=True, remove_columns=data_set['train'].column_names)
+    trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size)
 
-    lr=3e-5
-    n_epochs = 5
+    # Define parameters for scheduler
     weight_decay = 0.01
     warmup_steps = 250
     
-    batch_size = 128
-    trainloader = torch.utils.data.DataLoader(data_set, batch_size=batch_size)
-
-    
+    # Set optimzer for training model 
     optimizer = AdamW(model.parameters(), lr=lr, betas=(0.9,0.98), eps=1e-6, weight_decay=weight_decay)
     scheduler = get_linear_schedule_with_warmup(
     optimizer,
     warmup_steps,
-    n_epochs * len(trainloader))
+    epoch * len(trainloader))
 
+    # Train the model 
     losses, acc = train(
     model, 
     trainloader,
     optimizer, 
     scheduler,
-    n_epochs, 
+    epoch, 
     device)
 
     _, axis = plt.subplots(2)
