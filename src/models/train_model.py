@@ -47,12 +47,13 @@ def train(
     for ep in range(n_epochs):
 
         loss_epoch = []
+        print("before with")
         with tqdm(train_dl, unit="batch") as tepoch:
-
+            print("before batch")
             #Iterate through each batch in the dataloader
             for batch in train_dl:
                 tepoch.set_description(f"Epoch {ep}")
-
+                print("inside batch")
                 # VERY IMPORTANT: Make sure the model is in training mode, which turns on 
                 # things like dropout and layer normalization
                 model.train()
@@ -64,8 +65,10 @@ def train(
 
                 # Place each tensor on the GPU
                 batch = {b: batch[b].to(device) for b in batch}
-
+                print("after send batch to device")
                 # Pass the inputs through the model, get the current loss and logits
+                print(batch)
+                print(batch['label'])
                 outputs = model(
                     input_ids=batch['input_ids'],
                     attention_mask=batch['attention_mask'],
@@ -126,8 +129,6 @@ def train_main(lr, epoch, batch_size):
     #print(data_set.train_tweet)
 
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
-    
-    
 
     # Process the data by tokenizing it
     tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=data_set.column_names)
