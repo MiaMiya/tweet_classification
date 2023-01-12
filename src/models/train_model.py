@@ -127,9 +127,11 @@ def train_main(lr, epoch, batch_size):
 
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
     
+    
+
     # Process the data by tokenizing it
     tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=data_set.column_names)
-    trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size)
+    trainloader = DataLoader(tokenized_dataset, shuffle=True, batch_size=batch_size, collate_fn=collate_fn)
 
     # Define parameters for scheduler
     weight_decay = 0.01
