@@ -1,4 +1,6 @@
 [core]
-    remote = storage
+    remote = remote_storage
 ['remote "storage"']
     url = gdrive://1ayvVEfbaxkXiMXnvDRpenAmfJ238Mo5w
+['remote "remote_storage"']
+    url = gs://tweet_classification/
