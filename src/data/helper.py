@@ -12,7 +12,7 @@ def collate_fn(inputs):
     '''
     input_ids = torch.tensor([i['input_ids'] for i in inputs])
     attention_mask = torch.tensor([i['attention_mask'] for i in inputs])
-    labels = torch.tensor([i['labels'] for i in inputs])
+    labels = torch.tensor([i['label'] for i in inputs])
 
     # # Truncate to max length
     # max_len = max(attention_mask.sum(-1))
