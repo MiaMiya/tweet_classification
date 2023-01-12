@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'\
-  args: ['build', '-t', 'gcr.io/\cf2 \CocoaLigature0 braided-destiny-374308\cf0 \CocoaLigature1 /tweet_classification\'92, '.']\
-- name: 'gcr.io/cloud-builders/docker'\
-  args: ['push', 'gcr.io/\cf2 \CocoaLigature0 braided-destiny-374308\cf0 \CocoaLigature1 /tweet_classification\'92]}
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/braided-destiny-374308/tweet_classification', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/braided-destiny-374308/tweet_classification']
