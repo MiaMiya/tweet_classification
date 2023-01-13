@@ -21,7 +21,7 @@ from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
-BUCKET_NAME = "gs://tweet_classification"
+BUCKET_NAME = "tweet_classification"
 client = storage.Client()
 bucket = client.get_bucket(BUCKET_NAME)
 
