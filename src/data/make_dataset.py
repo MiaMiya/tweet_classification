@@ -58,10 +58,18 @@ class Tweets(Dataset):
 
     def load_preprocessed(self):
         try: 
-            data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
+            ## For local 
+            # data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
+            # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
+
+            ## For gcp 
+            with open('/gcs/tweet_classification/train_processed.npy', 'r') as f:
+                data_train = f.readlines()
+            with open('/gcs/tweet_classification/test_processed.npy', 'r') as f:
+                data_test = f.readlines()
+
             self.train_tweet = data_train[0,:]
             self.train_label = data_train[1,:]
-            data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
             self.test_tweet = data_test[0,:]
             self.test_label = data_test[1,:]
         except:
