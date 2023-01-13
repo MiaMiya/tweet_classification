@@ -9,6 +9,7 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY Makefile Makefile
 COPY setup.py setup.py
+COPY data.dvc data.dvc
 
 ##### folders ####
 COPY src/ src/
