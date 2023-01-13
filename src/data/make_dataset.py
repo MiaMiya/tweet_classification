@@ -69,9 +69,9 @@ class Tweets(Dataset):
             # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
 
             ## For gcp 
-            with open('gs://tweet_classification/data/processed/train_processed.npy', 'r') as f:
+            with open('gs://braided-destiny-374308/tweet_classification/data/processed/train_processed.npy', 'r') as f:
                 data_train = f.readlines()
-            with open('gs://tweet_classification/data/processed/test_processed.npy', 'r') as f:
+            with open('gs://braided-destiny-374308/tweet_classification/data/processed/test_processed.npy', 'r') as f:
                 data_test = f.readlines()
 
             self.train_tweet = data_train[0,:]
