@@ -23,6 +23,7 @@ class Tweets(Dataset):
                 print("Loaded the pre-processed files")
                 return
             except ValueError: # Data not created yet and we will create it 
+                print("No preprocessed data")
                 pass
 
         # Loading the data 
