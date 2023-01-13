@@ -1,6 +1,5 @@
-
+import torch 
 from tests import _PATH_DATA
-from src.data.make_dataset import Tweets
 from src.models.model import get_model
 import torch
 import pytest
@@ -14,12 +13,8 @@ def test_error_on_wrong_shape():
 
 
 def test_model():
-   model = get_model()
-   
-   assert model(input_ids=torch.radn(1,2,3), attention_mask=torch.radn(1,2,3),
-                    labels=torch.radn(1)).shape == torch.Size([1,2]), "Model output dimention not [1, 2]"
-
-
+    model = get_model()
+    assert model(input_ids=torch.arange(512).reshape(1,512), attention_mask=torch.ones(1,512, dtype=torch.int8)).logits[0].shape == torch.Size([2]), "Model output logits dimention not [2]"
 
 if __name__ == "__main__":
     test_model()
