@@ -20,4 +20,4 @@ COPY reports/figures/ reports/figures/
 WORKDIR /
 
 
-ENTRYPOINT ["python", "-u", "main.py"]
+ENTRYPOINT ["python", "-u", "src/models/train_model.py"]
