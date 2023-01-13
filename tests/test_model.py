@@ -5,6 +5,7 @@ from src.models.model import get_model
 import torch
 import pytest
 
+# Try
 def test_error_on_wrong_shape():
     model = get_model()
     #with pytest.raises(ValueError, match='Expected input to a 4D tensor'):
