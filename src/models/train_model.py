@@ -20,7 +20,7 @@ from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
-bucket_path = "gcs/tweet_classification/"
+bucket_path = "/gcs/tweet_classification/"
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
@@ -100,7 +100,7 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
-    torch.save(model.state_dict(), "{bucket_path}models/my_trained_model.pt")
+    torch.save(model.state_dict(), f"{bucket_path}models/my_trained_model.pt")
 
     return losses, acc
 
@@ -126,7 +126,7 @@ def train_main(lr, epoch, batch_size):
     model.to(device)
 
     # Load data
-    data_set = Tweets(in_folder="{bucket_path}data/raw", out_folder="{bucket_path}data/processed")
+    data_set = Tweets(in_folder=f"{bucket_path}data/raw", out_folder=f"{bucket_path}data/processed")
     #data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
 
