@@ -11,9 +11,8 @@ COPY Makefile Makefile
 COPY setup.py setup.py
 
 ##### folders ####
-COPY models models
-COPY src src
-COPY data data
+COPY models/ models/
+COPY src/ src/
 COPY reports/figures/ reports/figures/
 
 
