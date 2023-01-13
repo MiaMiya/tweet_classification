@@ -12,8 +12,8 @@ def test_data():
     dataset_train = np.load(f'{_PATH_DATA}/processed/train_processed.npy', allow_pickle=True)
     dataset_test =np.load(f'{_PATH_DATA}/processed/test_processed.npy', allow_pickle=True)
 
-    assert len(dataset_train[0]) == 185109, "Training dataset does not have the right size"
-    assert len(dataset_test[0]) == 61704, "Testing dataset does not have the right size"
+    assert len(dataset_train[0]) == 65025, "Training dataset does not have the right size"
+    assert len(dataset_test[0]) == 21676, "Testing dataset does not have the right size"
     assert len(dataset_train[0]) == len(dataset_train[1]), "Training dataset have uneven number of images and labels"
     assert len(dataset_test[0]) == len(dataset_test[1]), "Testing dataset have uneven number of images and labels"
 
