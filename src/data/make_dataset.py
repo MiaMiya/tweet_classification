@@ -71,8 +71,8 @@ class Tweets(Dataset):
             BUCKET_NAME = "tweet_classification"
             client = storage.Client()
             bucket = client.get_bucket(BUCKET_NAME)
-            blob_train = bucket.get_blob('data/processed/train_processed.npy')
-            blob_test = bucket.get_blob('data/processed/test_processed.npy')
+            blob_train = bucket.get_blob('/data/processed/train_processed.npy')
+            blob_test = bucket.get_blob('/data/processed/test_processed.npy')
             ## For gcp 
             data_train = np.load(blob_train.download_as_string(), allow_pickle=True)
             data_test = np.load(blob_test.download_as_string(), allow_pickle=True)
