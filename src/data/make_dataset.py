@@ -68,7 +68,7 @@ class Tweets(Dataset):
             ## For local 
             # data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
             # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
-            BUCKET_NAME = "gs://tweet_classification"
+            BUCKET_NAME = "tweet_classification"
             client = storage.Client()
             bucket = client.get_bucket(BUCKET_NAME)
             blob_train = bucket.get_blob('data/processed/train_processed.npy')
