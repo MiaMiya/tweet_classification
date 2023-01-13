@@ -9,6 +9,7 @@ import click
 import numpy as np
 #import torch
 from torch.utils.data import Dataset 
+from google.cloud import storage
 
 class Tweets(Dataset):
     def __init__(self, in_folder: str = "", out_folder: str = "") -> None:
@@ -67,12 +68,19 @@ class Tweets(Dataset):
             ## For local 
             # data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
             # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
-
+            BUCKET_NAME = "gs://tweet_classification"
+            client = storage.Client()
+            bucket = client.get_bucket(BUCKET_NAME)
+            blob_train = bucket.get_blob('data/processed/train_processed.npy')
+            blob_test = bucket.get_blob('data/processed/test_processed.npy')
             ## For gcp 
-            with open('gs://braided-destiny-374308/tweet_classification/data/processed/train_processed.npy', 'r') as f:
-                data_train = f.readlines()
-            with open('gs://braided-destiny-374308/tweet_classification/data/processed/test_processed.npy', 'r') as f:
-                data_test = f.readlines()
+            data_train = np.load(blob_train.download_as_string(), allow_pickle=True)
+            data_test = np.load(blob_test.download_as_string(), allow_pickle=True)
+
+            # with open('gs://braided-destiny-374308/tweet_classification/data/processed/train_processed.npy', 'r') as f:
+            #     data_train = f.readlines()
+            # with open('gs://braided-destiny-374308/tweet_classification/data/processed/test_processed.npy', 'r') as f:
+            #     data_test = f.readlines()
 
             self.train_tweet = data_train[0,:]
             self.train_label = data_train[1,:]

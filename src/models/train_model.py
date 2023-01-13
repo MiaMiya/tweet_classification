@@ -15,12 +15,15 @@ from tqdm import tqdm
 from datasets import Dataset
 import pandas as pd
 import pickle
+from google.cloud import storage
 
 from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
-bucket_path = "gs://braided-destiny-374308/tweet_classification/"
+BUCKET_NAME = "gs://tweet_classification"
+client = storage.Client()
+bucket = client.get_bucket(BUCKET_NAME)
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
@@ -100,7 +103,7 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
-    torch.save(model.state_dict(), f"{bucket_path}models/my_trained_model.pt")
+    torch.save(model.state_dict(), f"{bucket}models/my_trained_model.pt")
 
     return losses, acc
 
@@ -126,7 +129,7 @@ def train_main(lr, epoch, batch_size):
     model.to(device)
 
     # Load data
-    data_set = Tweets(in_folder=f"{bucket_path}data/raw", out_folder=f"{bucket_path}data/processed")
+    data_set = Tweets(in_folder=f"{bucket}data/raw", out_folder=f"{bucket}data/processed")
     #data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
 
@@ -169,7 +172,7 @@ def train_main(lr, epoch, batch_size):
     axis[0].set_xlabel("iterations")
     axis[0].set_ylabel("loss")
 
-    plt.savefig(f"{bucket_path}reports/figures/training_curve.png")
+    plt.savefig(f"{bucket}reports/figures/training_curve.png")
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
