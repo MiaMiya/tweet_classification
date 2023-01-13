@@ -20,6 +20,8 @@ from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
+bucket_path = "gcs/tweet_classification/"
+
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
 
@@ -98,7 +100,7 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
-    torch.save(model.state_dict(), "models/my_trained_model.pt")
+    torch.save(model.state_dict(), "{bucket_path}models/my_trained_model.pt")
 
     return losses, acc
 
@@ -124,7 +126,7 @@ def train_main(lr, epoch, batch_size):
     model.to(device)
 
     # Load data
-    data_set = Tweets(in_folder="data/raw", out_folder="gcs/tweet_classification")
+    data_set = Tweets(in_folder="data/raw", out_folder="{bucket_path}data/processed")
     #data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
 
@@ -167,7 +169,7 @@ def train_main(lr, epoch, batch_size):
     axis[0].set_xlabel("iterations")
     axis[0].set_ylabel("loss")
 
-    plt.savefig(f"reports/figures/training_curve.png")
+    plt.savefig(f"{bucket_path}reports/figures/training_curve.png")
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
