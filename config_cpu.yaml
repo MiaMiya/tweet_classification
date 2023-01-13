@@ -1,0 +1,6 @@
+workerPoolSpecs:
+   machineSpec:
+      machineType: e2-standard-4
+   replicaCount: 1
+   containerSpec:
+      imageUri: gcr.io/braided-destiny-374308/tweet_classification
