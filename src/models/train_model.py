@@ -20,7 +20,7 @@ from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
-bucket_path = "/gcs/tweet_classification/"
+bucket_path = "gcs://tweet_classification/"
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
