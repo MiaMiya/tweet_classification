@@ -16,3 +16,4 @@ datasets
 tqdm
 matplotlib
 pytest
+gcsfs
