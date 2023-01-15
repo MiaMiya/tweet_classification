@@ -129,7 +129,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 3 fill here ---
+We used the framework Transformers, to train an NLP classifier. The goal of the classifier was to classify tweets whether the author is Donald Trump or a Russian troll account. From the framework we used the two functions `AutoTokenizer` and `AutoModelForSequenceClassification` to do respectively tokenization and classification. Both functions are based on the pre-trained model [bert-base-uncased](https://huggingface.co/bert-base-uncased) from Huggingface. This is an English base BERT model, trained on a large English corpus of raw text, hence without any human labeling. It's uncased, meaning the model sees no difference between uppercase and lowercase letters. The classification task in our project was done with two labels, whether the selected tweet came from Donald Trump or a Russian Troll.
 
 ## Coding environment
 
@@ -148,7 +148,14 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 4 fill here ---
+We used GitHubXXX for managing dependencies. 
+To get a complete copy of our development environment, one would have to first fork our project repository [tweet_classification](https://github.com/MiaMiya/tweet_classification) on GitHub. Then clone the repository, which can be done with the following command:
+
+`git clone https://github.com/<username>/tweet_classification.git`
+
+Finally to retrieve the data, one would have to pull from google cloud storage with dvc, using the command:
+
+`dvc pull`      
 
 ### Question 5
 
@@ -163,7 +170,7 @@ s174479, s175393, s183909, s183998
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+We did use the cookiecutter template to structure our code. We have used the reports and src folders. We have not used the folders docs, models, notebooks, and references. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include unit tests of our code. 
 
 ### Question 6
 
@@ -174,7 +181,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 6 fill here ---
+We did not implement any rules for code quality or format. Mainly because we were mostly just two people writing code together, hence not a lot of different writing styles. In larger projects, where many different people all wirte code it is very important to have some kind of rules or coding practices in order to keep the code easy readable and understandable for all members of the team. 
 
 ## Version control
 
@@ -193,7 +200,11 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 7 fill here ---
+In total we have implemented two main tests. One for testing the data, and one for testing the model.
+
+For the data test we are testing whether there are the same amount of tweets and labels, if the data are the right datatypes (tweets as strings, and labels as integers either 0 or 1), and if there are any NA's.
+
+For the model we test the shape of the output of the model.
 
 ### Question 8
 
@@ -208,7 +219,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of our code is XX%. As mentioned above we hve included tests for our `make_dataset.py` and our `model.py`. Even though we had 100% coverage, it is still not guaranteed that the code is error free. There could be errors in lines of code which are tested, but not captured by the tests. 
 
 ### Question 9
 
@@ -223,7 +234,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 9 fill here ---
+We made very much use of especially pull requests, since everyone worked on their own forked version of the project. Such that everytime we wanted to commit changes to the code, we had to do a pull request. But we did have enough trust in each other to grant each member access to confirm his/hers own pull requests. The use of branches was then more up to the individual whether to use branches on his/hers own forked reopsitory or not. 
 
 ### Question 10
 
@@ -238,7 +249,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 10 fill here ---
+We did make use of DVC. For instance to push and pull our data from the cloud. 
 
 ### Question 11
 
@@ -320,7 +331,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 15 fill here ---
+We build our docker images automatically using a trigger in Google Cloud everytime we pushed changes to our repository. We did though disabled this trigger at times, to not run out of ressources. Hence only building new docker images, when we found it necessary. 
 
 ### Question 16
 
@@ -352,7 +363,12 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 17 fill here ---
+We used the following services:
+- Engine. To train our model on a virtual machine.
+- Bucket. To store our data and models in the cloud.
+- Cloud Build (with Triggers). To automatically create new images, when GutHub changes were pushed.
+- Container Registry. To store our images.
+- Vertex AI. To train our model.
 
 ### Question 18
 
@@ -376,7 +392,8 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 19 fill here ---
+<img width="616" alt="Skærmbillede 2023-01-15 kl  18 21 06" src="https://user-images.githubusercontent.com/117659231/212556612-8707625e-1113-4f6c-829f-453c63cd01e0.png">
+
 
 ### Question 20
 
@@ -385,7 +402,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 20 fill here ---
+<img width="709" alt="Skærmbillede 2023-01-15 kl  18 21 56" src="https://user-images.githubusercontent.com/117659231/212556632-cca37eb7-adad-4f80-a7c6-892901cd169e.png">
 
 ### Question 21
 
@@ -394,7 +411,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
---- question 21 fill here ---
+<img width="998" alt="Skærmbillede 2023-01-15 kl  18 22 28" src="https://user-images.githubusercontent.com/117659231/212556651-602d0b6d-4f45-48bb-9cce-8685990e5d4e.png">
 
 ### Question 22
 
