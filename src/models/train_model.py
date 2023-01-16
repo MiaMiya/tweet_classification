@@ -99,6 +99,7 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
+    print(f"The average accuracy is {np.round(np.mean(acc),2)}")
     torch.save(model.state_dict(), "/gcs/tweet_classification/my_trained_model.pt")
 
     return losses, acc
