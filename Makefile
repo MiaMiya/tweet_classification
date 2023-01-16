@@ -39,9 +39,13 @@ predict: requirements
 visualize: requirements
 	$(PYTHON_INTERPRETER) src/visualization/visualize.py models/trained_model.pt 
 
-## Make docker build 
-docker_build: requirements
+## Make docker build train
+docker_build_train: requirements
 	$(PYTHON_INTERPRETER) docker build -f train.dockerfile . -t $(PROJECT_NAME):latest
+
+## Make docker build test
+docker_build_test: requirements
+	$(PYTHON_INTERPRETER) docker build -f test.dockerfile . -t $(PROJECT_NAME):latest
 
 ## Make docker tag 
 docker_tag: requirements
