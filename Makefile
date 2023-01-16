@@ -39,6 +39,22 @@ predict: requirements
 visualize: requirements
 	$(PYTHON_INTERPRETER) src/visualization/visualize.py models/trained_model.pt 
 
+## Make docker build 
+docker_build: requirements
+	$(PYTHON_INTERPRETER) docker build -f train.dockerfile . -t tweet_classification:latest
+
+## Make docker tag 
+docker_tag: requirements
+	$(PYTHON_INTERPRETER) docker tag tester gcr.io/braided-destiny-374308/tweet_classification
+
+## Make docker push 
+docker_push:requirements
+	$(PYTHON_INTERPRETER) docker push gcr.io/braided-destiny-374308/tweet_classification
+
+## Make run job
+run_job: requirements
+	$(PYTHON_INTERPRETER) gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
+
 
 ## Delete all compiled Python files
 clean:
