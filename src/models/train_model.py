@@ -99,7 +99,8 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
-    torch.save(model.state_dict(), "/gcs/tweet_classification/processed/my_trained_model.pt")
+    print(f"The average accuracy is {np.round(np.mean(acc),2)}")
+    torch.save(model.state_dict(), "/gcs/tweet_classification/my_trained_model.pt")
 
     return losses, acc
 
@@ -168,7 +169,7 @@ def train_main(lr, epoch, batch_size):
     axis[0].set_xlabel("iterations")
     axis[0].set_ylabel("loss")
 
-    plt.savefig("/gcs/tweet_classification/processed/training_curve.png")
+    plt.savefig("/gcs/tweet_classification/training_curve.png")
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

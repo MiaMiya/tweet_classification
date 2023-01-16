@@ -80,8 +80,10 @@ def predict_main(model_checkpoint, data_to_predict):
     model.to(device)
 
     # Load data
-    data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
-    data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.test_tweet, 'label':data_set.test_label}))
+    data_set = Tweets()
+    data_test = np.load("/gcs/tweet_classification/processed/test_processed.npy", allow_pickle=True)
+
+    data_set = Dataset.from_pandas(pd.DataFrame({'text':data_test[0,:], 'label':data_test[1,:]}))
 
     # Process the data by tokenizing it
     tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=['text'])
@@ -89,7 +91,7 @@ def predict_main(model_checkpoint, data_to_predict):
     trainloader = DataLoader(tokenized_dataset, collate_fn=collate_fn)
 
     # Train the model 
-    prediction = predict(
+    prediction, probs = predict(
     model, 
     trainloader,
     device)
