@@ -36,11 +36,16 @@ class Tweets(Dataset):
 
         pd_Russian.rename(columns = {'text' : 'Tweet'}, inplace=True)
         pd_D_T.rename(columns = {'content' : 'Tweet'}, inplace=True)
+        
+        ## For real use
+        # min_len_pd = min(len(pd_Russian), len(pd_D_T))
 
-        min_len_pd = min(len(pd_Russian), len(pd_D_T))
+        # pd_Russian = pd_Russian.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
+        # pd_D_T = pd_D_T.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
 
-        pd_Russian = pd_Russian.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
-        pd_D_T = pd_D_T.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
+        ## For making sure gcp works thus test with much smaller dataset
+        pd_Russian = pd_Russian.sample(frac = 1).iloc[:500,:].reset_index(drop=True)
+        pd_D_T = pd_D_T.sample(frac = 1).iloc[:500,:].reset_index(drop=True)
 
         # Combine the two dataframe
         pd_combine = pd.concat([pd_Russian[['Tweet','Label']],pd_D_T[['Tweet','Label']]], ignore_index=True).reset_index(drop=True)
