@@ -41,7 +41,7 @@ visualize: requirements
 
 ## Make docker build 
 docker_build: requirements
-	$(PYTHON_INTERPRETER) docker build -f train.dockerfile . -t tweet_classification:latest
+	$(PYTHON_INTERPRETER) docker build -f Dockerfile.dockerfile . -t tweet_classification:latest
 
 ## Make docker tag 
 docker_tag: requirements
@@ -53,7 +53,7 @@ docker_push:requirements
 
 ## Make run job
 run_job: requirements
-	$(PYTHON_INTERPRETER) gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
 
 
 ## Delete all compiled Python files
