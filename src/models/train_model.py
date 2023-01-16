@@ -125,7 +125,7 @@ def train_main(lr, epoch, batch_size):
     model.to(device)
 
     # Load data
-    data_set = Tweets(in_folder=f"{bucket}/data/raw", out_folder=f"{bucket}/data/processed")
+    data_set = Tweets(in_folder="/gcs/tweet_classification/raw", out_folder="/gcs/tweet_classification/processed")
     #data_set = Tweets(in_folder="data/raw", out_folder="data/processed")
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_set.train_tweet, 'label':data_set.train_label}))
 
