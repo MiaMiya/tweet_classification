@@ -73,14 +73,19 @@ class Tweets(Dataset):
             ## For local 
             # data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
             # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
-            BUCKET_NAME = "tweet_classification"
-            client = storage.Client()
-            bucket = client.get_bucket(BUCKET_NAME)
-            blob_train = bucket.get_blob('/data/processed/train_processed.npy')
-            blob_test = bucket.get_blob('/data/processed/test_processed.npy')
-            ## For gcp 
-            data_train = np.load(blob_train.download_as_string(), allow_pickle=True)
-            data_test = np.load(blob_test.download_as_string(), allow_pickle=True)
+
+            # ## Test 
+            # BUCKET_NAME = "tweet_classification"
+            # client = storage.Client()
+            # bucket = client.get_bucket(BUCKET_NAME)
+            # blob_train = bucket.get_blob('/data/processed/train_processed.npy')
+            # blob_test = bucket.get_blob('/data/processed/test_processed.npy')
+            # ## For gcp 
+            # data_train = np.load(blob_train.download_as_string(), allow_pickle=True)
+            # data_test = np.load(blob_test.download_as_string(), allow_pickle=True)
+
+            data_train = np.load("/gcs/tweet_classification/processed/train_processed.npy", allow_pickle=True)
+            data_test = np.load("/gcs/tweet_classification/processed/test_processed.npy", allow_pickle=True)
 
             # with open('gs://braided-destiny-374308/tweet_classification/data/processed/train_processed.npy', 'r') as f:
             #     data_train = f.readlines()

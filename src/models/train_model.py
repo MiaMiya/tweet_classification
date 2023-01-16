@@ -21,26 +21,6 @@ from src.models.model import get_model
 from src.data.make_dataset import Tweets
 from src.data.helper import tokenize_function, collate_fn
 
-BUCKET_NAME = "tweet_classification"
-client = storage.Client()
-bucket = client.get_bucket(BUCKET_NAME)
-
-
-## For seeing what is in bukket 
-def list_blobs(bucket_name):
-    """Lists all the blobs in the bucket."""
-    # bucket_name = "your-bucket-name"
-
-    storage_client = storage.Client()
-
-    # Note: Client.list_blobs requires at least package version 1.17.0.
-    blobs = storage_client.list_blobs(bucket_name)
-
-    # Note: The call returns a response only when the iterator is consumed.
-    for blob in blobs:
-        print(blob.name)
-
-
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
 
@@ -119,7 +99,7 @@ def train(
             
                 tepoch.set_postfix(loss=loss.item(), accuracy=acc_batch)
 
-    torch.save(model.state_dict(), f"{bucket}/models/my_trained_model.pt")
+    torch.save(model.state_dict(), "/gcs/tweet_classification/processed/my_trained_model.pt")
 
     return losses, acc
 
@@ -188,7 +168,7 @@ def train_main(lr, epoch, batch_size):
     axis[0].set_xlabel("iterations")
     axis[0].set_ylabel("loss")
 
-    plt.savefig(f"{bucket}/reports/figures/training_curve.png")
+    plt.savefig("/gcs/tweet_classification/processed/training_curve.png")
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -200,7 +180,6 @@ if __name__ == '__main__':
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
     load_dotenv(find_dotenv())
-    list_blobs(BUCKET_NAME)
 
     train_main()
 
