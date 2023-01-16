@@ -25,6 +25,22 @@ BUCKET_NAME = "tweet_classification"
 client = storage.Client()
 bucket = client.get_bucket(BUCKET_NAME)
 
+
+## For seeing what is in bukket 
+def list_blobs(bucket_name):
+    """Lists all the blobs in the bucket."""
+    # bucket_name = "your-bucket-name"
+
+    storage_client = storage.Client()
+
+    # Note: Client.list_blobs requires at least package version 1.17.0.
+    blobs = storage_client.list_blobs(bucket_name)
+
+    # Note: The call returns a response only when the iterator is consumed.
+    for blob in blobs:
+        print(blob.name)
+
+
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)
 
@@ -184,6 +200,7 @@ if __name__ == '__main__':
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
     load_dotenv(find_dotenv())
+    list_blobs(BUCKET_NAME)
 
     train_main()
 
