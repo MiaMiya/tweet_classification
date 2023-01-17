@@ -20,4 +20,4 @@ WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
 
-#ENTRYPOINT ["python", "-u", "src/models/predict_model.py"]
+ENTRYPOINT ["python", "-u", "src/models/predict_model.py"]

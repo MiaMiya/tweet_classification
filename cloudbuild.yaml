@@ -1,5 +1,9 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/braided-destiny-374308/tweet_classification', '.']
+  args: ['build', '-f', 'train.dockerfile', '.', '-t', 'gcr.io/braided-destiny-374308/tweet_classification/train']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/braided-destiny-374308/tweet_classification']
+  args: ['push', 'gcr.io/braided-destiny-374308/tweet_classification/train']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-f', 'test.dockerfile', '.', '-t', 'gcr.io/braided-destiny-374308/tweet_classification/inference']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/braided-destiny-374308/tweet_classification/inference']
