@@ -315,7 +315,7 @@ In our case we did not make use of any configuration tools such as hydra. Howeve
 >
 > Answer:
 
-Due to time constraint and complexity of our model we have selected not to use W&B. We were not able to run a training loop with more than 1 epochs and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss is in the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some random sampled tweets in our training set such we could take a look at how the input would look like and make sure they still make sense. With W&B we could also compare performance of different models, currently we are only using BERT-base-uncased we would than be able to compare with BERTweet-base using accuracy or other metrics.
+Due to time constraint and complexity of our model we have selected not to use W&B. We were not able to run a training loop with more than 1 epochs and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss is in the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some random sampled tweets in our training set such we could take a look at how the input would look like and make sure they still make sense. With W&B we could also compare performance of different models, currently we are only using BERT-base-uncased we would then be able to compare with BERTweet-base using accuracy or other metrics.
 
 ### Question 15
 
@@ -330,8 +330,8 @@ Due to time constraint and complexity of our model we have selected not to use W
 >
 > Answer:
 
-For our project we developed three images: one for training, one for inference and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud everytime we pushed changes to our repository. We did though disabled this trigger at times, to not run out of resources. Hence only building new docker images, when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris. 
-
+For our project we developed three images: one for training, one for inference and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud every time we pushed changes to our repository. We did though disable this trigger at times, to not run out of resources. Hence only building new docker images when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris.
+      
 ### Question 16
 
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
@@ -345,7 +345,7 @@ For our project we developed three images: one for training, one for inference a
 >
 > Answer:
 
-Debugging method was dependent on group member, but majority of the times print statements was used. The print statement insures us understanding of how our input and output looks like and we could evaluate whether they makes sense for the given context. Furthermore, this allows us to understand where in the code the error is starting to occure, since at times even a wrong input will still work and it would just carry on with the incorrect input/output untill a call can not handle it. We some group members have also selected to look at the data and make sure we shuffled them and exaimning if the model is fitting the data. We decided not the create a profiling, since we majority of our problem accured when we transformed our code to could which we could not connect to the profiling.
+Debugging method was dependent on group member, but majority of the times print statements was used. The print statement insures us understanding of how our input and output looks like and we could evaluate whether they make sense for the given context. Furthermore, this allows us to understand where in the code the error is starting to occur, since at times even a wrong input will still work, and it would just carry on with the incorrect input/output until a call cannot handle it. We some group members have also selected to look at the data and make sure we shuffled them and examining if the model is fitting the data. We decided not the create a profiling, since we majority of our problem occurred when we transformed our code to could which we could not connect to the profiling.
 
 ## Working in the cloud
 
@@ -363,11 +363,11 @@ Debugging method was dependent on group member, but majority of the times print 
 > Answer:
 
 We used the following services:
-- Compute Engine. To train our model on a virtual machine.
+- Compute Engine. To train and host our model on a virtual machine.
 - Bucket. To store our data and models in the cloud.
-- Cloud Build (with Triggers). To automatically create new images, when GutHub changes were pushed.
-- Container Registry. To store our images.
-- Vertex AI. To train our model.
+- Cloud Build (with Triggers). To automatically create new images, when the GitHub repository changes were pushed.
+- Container Registry. To store our images and containers.
+- Vertex AI. To run our containers and produce the desired output based on the call.
 
 ### Question 18
 
@@ -391,8 +391,8 @@ We used the following services:
 >
 > Answer:
 
-<img width="1000" alt="Skærmbillede 2023-01-17 kl  16 18 17" src="https://user-images.githubusercontent.com/117659231/212937225-a149768d-d0f7-4603-9313-dd636c71fe9e.png">
-<img width="1005" alt="Skærmbillede 2023-01-17 kl  16 18 32" src="https://user-images.githubusercontent.com/117659231/212937279-3a577b9f-0781-490a-81d6-9380f2062d63.png">
+<img width="616" alt="Skærmbillede 2023-01-15 kl  18 21 06" src="https://user-images.githubusercontent.com/117659231/212556612-8707625e-1113-4f6c-829f-453c63cd01e0.png">
+
 
 ### Question 20
 
@@ -401,7 +401,7 @@ We used the following services:
 >
 > Answer:
 
-<img width="698" alt="Skærmbillede 2023-01-17 kl  16 20 19" src="https://user-images.githubusercontent.com/117659231/212937730-211e858b-fe00-4183-8f77-20ee85b91c43.png">
+<img width="709" alt="Skærmbillede 2023-01-15 kl  18 21 56" src="https://user-images.githubusercontent.com/117659231/212556632-cca37eb7-adad-4f80-a7c6-892901cd169e.png">
 
 ### Question 21
 
@@ -410,7 +410,7 @@ We used the following services:
 >
 > Answer:
 
-<img width="995" alt="Skærmbillede 2023-01-17 kl  16 22 27" src="https://user-images.githubusercontent.com/117659231/212938341-70e23345-37c8-4f71-9516-c8159b0d7135.png">
+<img width="998" alt="Skærmbillede 2023-01-15 kl  18 22 28" src="https://user-images.githubusercontent.com/117659231/212556651-602d0b6d-4f45-48bb-9cce-8685990e5d4e.png">
 
 ### Question 22
 
