@@ -391,8 +391,8 @@ We used the following services:
 >
 > Answer:
 
-<img width="616" alt="Skærmbillede 2023-01-15 kl  18 21 06" src="https://user-images.githubusercontent.com/117659231/212556612-8707625e-1113-4f6c-829f-453c63cd01e0.png">
-
+<img width="1000" alt="Skærmbillede 2023-01-17 kl  16 18 17" src="https://user-images.githubusercontent.com/117659231/212937225-a149768d-d0f7-4603-9313-dd636c71fe9e.png">
+<img width="1005" alt="Skærmbillede 2023-01-17 kl  16 18 32" src="https://user-images.githubusercontent.com/117659231/212937279-3a577b9f-0781-490a-81d6-9380f2062d63.png">
 
 ### Question 20
 
@@ -401,7 +401,7 @@ We used the following services:
 >
 > Answer:
 
-<img width="709" alt="Skærmbillede 2023-01-15 kl  18 21 56" src="https://user-images.githubusercontent.com/117659231/212556632-cca37eb7-adad-4f80-a7c6-892901cd169e.png">
+<img width="698" alt="Skærmbillede 2023-01-17 kl  16 20 19" src="https://user-images.githubusercontent.com/117659231/212937730-211e858b-fe00-4183-8f77-20ee85b91c43.png">
 
 ### Question 21
 
@@ -410,7 +410,7 @@ We used the following services:
 >
 > Answer:
 
-<img width="998" alt="Skærmbillede 2023-01-15 kl  18 22 28" src="https://user-images.githubusercontent.com/117659231/212556651-602d0b6d-4f45-48bb-9cce-8685990e5d4e.png">
+<img width="995" alt="Skærmbillede 2023-01-17 kl  16 22 27" src="https://user-images.githubusercontent.com/117659231/212938341-70e23345-37c8-4f71-9516-c8159b0d7135.png">
 
 ### Question 22
 
