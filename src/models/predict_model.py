@@ -86,7 +86,7 @@ def predict_main(model_checkpoint, data_to_predict):
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_test[0,:], 'label':data_test[1,:]}))
 
     # Process the data by tokenizing it
-    tokenized_dataset = data_set.map(tokenize_function, batched=True, remove_columns=['text'])
+    tokenized_dataset = data_set.map(tokenize_function, remove_columns=['text'])
 
     trainloader = DataLoader(tokenized_dataset, collate_fn=collate_fn)
 
