@@ -1,8 +1,11 @@
-from tests import _PATH_DATA
-from src.data.make_dataset import Tweets
 import os.path
+
+import numpy as np
 import pytest
-import numpy as np 
+
+from src.data.make_dataset import Tweets
+from tests import _PATH_DATA
+
 
 @pytest.mark.skipif(not os.path.exists(f'{_PATH_DATA}/processed/train_processed.npy'), reason="Data files not found")
 @pytest.mark.skipif(not os.path.exists(f'{_PATH_DATA}/processed/test_processed.npy'), reason="Data files not found")

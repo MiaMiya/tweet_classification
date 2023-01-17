@@ -1,5 +1,6 @@
-from src.models.model import get_tokenizer
 import torch
+
+from src.models.model import get_tokenizer
 
 
 def tokenize_function(examples):

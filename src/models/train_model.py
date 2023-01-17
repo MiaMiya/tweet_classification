@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
-import click
-import numpy as np
 import logging
+import pickle
+
+import click
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import torch
+from datasets import Dataset
 from dotenv import find_dotenv, load_dotenv
-import torch 
-import matplotlib.pyplot as plt 
+from google.cloud import storage
+from sklearn import metrics
 from torch import nn, optim
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader
-from transformers import AdamW
-from transformers import get_linear_schedule_with_warmup
-from sklearn import metrics
 from tqdm import tqdm
-from datasets import Dataset
-import pandas as pd
-import pickle
-from google.cloud import storage
+from transformers import AdamW, get_linear_schedule_with_warmup
 
-from src.models.model import get_model
+from src.data.helper import collate_fn, tokenize_function
 from src.data.make_dataset import Tweets
-from src.data.helper import tokenize_function, collate_fn
+from src.models.model import get_model
+
 
 def accuracy(target, pred):
     return metrics.accuracy_score(target, pred)

@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-import click
-import numpy as np
 import logging
+import pickle
+
+import click
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import torch
+from datasets import Dataset
 from dotenv import find_dotenv, load_dotenv
-import torch 
-import matplotlib.pyplot as plt 
+from sklearn import metrics
 from torch import nn, optim
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader
-from transformers import AdamW
-from transformers import get_linear_schedule_with_warmup
-from sklearn import metrics
 from tqdm import tqdm
-from datasets import Dataset
-import pandas as pd
-import pickle
+from transformers import AdamW, get_linear_schedule_with_warmup
 
-from src.models.model import get_model
+from src.data.helper import collate_fn, tokenize_function
 from src.data.make_dataset import Tweets
-from src.data.helper import tokenize_function, collate_fn
+from src.models.model import get_model
+
 
 def predict(
     model: nn.Module, 
@@ -81,7 +82,7 @@ def predict_main(model_checkpoint, data_to_predict):
 
     # Load data
     data_set = Tweets()
-    data_test = np.load("/gcs/tweet_classification/processed/test_processed.npy", allow_pickle=True)
+    data_test = np.load("data_to_predict", allow_pickle=True)
 
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_test[0,:], 'label':data_test[1,:]}))
 
