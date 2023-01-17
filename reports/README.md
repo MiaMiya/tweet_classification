@@ -147,15 +147,13 @@ We used the framework Transformers, to train an NLP classifier. The goal of the 
 > *complete copy of our development enviroment, one would have to run the following commands*
 >
 > Answer:
+For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create an new environment by using `conda create -n ‘enviorment name’ python=3.9`
 
-We used GitHubXXX for managing dependencies. 
-To get a complete copy of our development environment, one would have to first fork our project repository [tweet_classification](https://github.com/MiaMiya/tweet_classification) on GitHub. Then clone the repository, which can be done with the following command:
+Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them download all the dependencies using `pip install -r requirements.txt`. 
 
-`git clone https://github.com/<username>/tweet_classification.git`
+We have our GitHub repository with all of our code, which all members will be working on their own forked version. For cloning the repository, they will call the function `git clone https://github.com/<username>/tweet_classification.git`
 
-Finally to retrieve the data, one would have to pull from google cloud storage with dvc, using the command:
-
-`dvc pull`      
+To obtain the data used for the project the command `dvc pull` will be used, which would download the raw and processed versions of the data.
 
 ### Question 5
 
@@ -170,7 +168,7 @@ Finally to retrieve the data, one would have to pull from google cloud storage w
 > *experiments.*
 > Answer:
 
-We did use the cookiecutter template to structure our code. We have used the reports and src folders. We have not used the folders docs, models, notebooks, and references. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include unit tests of our code. 
+We did use the cookiecutter template to structure our code. From the cookiecutter template we have used selected premade folders src, report and models. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include all the unit tests for our code. Besides that we customised the makefile and requirements.txt file. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilise google cloud platform we added 3 configuration files and two dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
 
 ### Question 6
 
