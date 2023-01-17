@@ -33,7 +33,7 @@ train: requirements
 
 ## Make predict
 predict: requirements
-	$(PYTHON_INTERPRETER) src/models/predict_model.py models/trained_model.pt data/processed/test_processed.pt
+	$(PYTHON_INTERPRETER) src/models/predict_model.py /gcs/tweet_classification/my_trained_model.pt /gcs/tweet_classification/processed/test_processed.npy
 
 ## Make visualize
 visualize: requirements
