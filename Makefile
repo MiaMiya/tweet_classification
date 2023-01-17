@@ -57,12 +57,12 @@ docker_push:requirements
 
 ## Make run job train
 run_job_train: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu_train.yaml
 
 ## Make run job test
-run_job_train: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
-	
+run_job_inference: requirements
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu_inference.yaml
+
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
