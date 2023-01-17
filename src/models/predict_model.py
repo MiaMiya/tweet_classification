@@ -97,9 +97,9 @@ def predict_main(model_checkpoint, data_to_predict):
     device)
 
     print("Predictions")
-    for i in prediction:
+    for index,pred in enumerate(prediction):
         print(
-            f"tweet {i+1} predicted to be class {prediction.item()} with probability {probs[i, prediction].item()}"
+            f"tweet {index+1} predicted to be class {pred} with probability {probs[index]}"
         )
 
 if __name__ == '__main__':
