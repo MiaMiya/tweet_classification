@@ -57,8 +57,8 @@ def predict(
             else: 
                 probs = log_probs.softmax(dim=-1).detach().flatten().numpy()
             
-            probability.append(probs)
-            prediction.append(probs < 0.5)
+            probability.append(probs[0])
+            prediction.append(probs[0] < 0.5)
             
     return prediction, probability
 
