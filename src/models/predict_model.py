@@ -81,7 +81,6 @@ def predict_main(model_checkpoint, data_to_predict):
     model.to(device)
 
     # Load data
-    data_set = Tweets()
     data_test = np.load(data_to_predict, allow_pickle=True)
 
     data_set = Dataset.from_pandas(pd.DataFrame({'text':data_test[0,:], 'label':data_test[1,:]}))
