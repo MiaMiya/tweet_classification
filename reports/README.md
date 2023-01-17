@@ -386,9 +386,9 @@ We did set up a Compute Engine. The instance for the project had the following h
 - Zone: europe-west4-a
 - Machine Type: n1-standard-1
 - GPUs: 1 x NVIDIA V100
-But we did not really make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
+But we did not make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
 
-Instead we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our model for prediction.
+Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model.
 
 ### Question 19
 
@@ -524,4 +524,7 @@ Another issue was that we didn't save our data correctly in the bucket. We tried
 >
 > Answer:
 
---- question 27 fill here ---
+Students s183909 and s183998 were mainly in charge of setting up the model, and writing the training and prediction scripts etc. 
+Students s174479 and s175393 were mainly in charge of setting up the project in the cloud and deploying the model etc.
+All along we communicated, discussed our work helped each other out with challenges. 
+Regarding the report we contributed equally, each answering different questions and discussing some together.  
