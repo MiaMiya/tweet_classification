@@ -217,7 +217,7 @@ For the model we test the shape of the input and output of the model.
 >
 > Answer:
 
-The total code coverage of our code is 83.4%. As mentioned above we have included tests for our `make_dataset.py` and our `model.py`. However, it is not guaranteed that the code is mostly error free as there could be errors in lines of code which have not been tested or not captured by the tests. 
+The total code coverage of our code is 83.4%. As mentioned above we have included tests for our `make_dataset.py` and our `model.py`. However, it is not guaranteed that the code is mostly error free as there could be errors in lines of code which have not been tested or not captured by the tests, such as if we only test for inpute type but not if there is an input. There are other python documents such as predict_model.py and train_model.py which we did not create tests for, thus these scripts are not tested. And this place further constrain on our code coverage, thereby reliability of how error free the source codes are.  
 
 ### Question 9
 
@@ -232,7 +232,7 @@ The total code coverage of our code is 83.4%. As mentioned above we have include
 >
 > Answer:
 
-We made very much use branches and especially pull requests. To avoid excessive merge conflicts, all team members worked on their own forked version of the project. Such that everytime we wanted to commit changes to the code, we had to do a pull request. But for the size of the project being quite small and we wanted to speed up the collaboration, we granted each member access to confirm his/hers own pull requests. When making changes to the code we create new branches so that it us to go back to previous working version if something breaks in the new updates. 
+We made very much use branches and especially pull requests. To avoid excessive merge conflicts, all team members worked on their own forked version of the project. Such that every time we wanted to commit changes to the code, we had to do a pull request. But for the size of the project being quite small and we wanted to speed up the collaboration, we granted each member access to confirm his/hers own pull requests. When making changes to the code we create new branches so that it us to go back to previous working version if something breaks in the new updates. 
 
 ### Question 10
 
@@ -247,7 +247,7 @@ We made very much use branches and especially pull requests. To avoid excessive 
 >
 > Answer:
 
-We attempted to make use of DVC, however it turned to be unnecessary for our project since there is no changes in data over time and therefore no need for versioning. That being said, in the case where we would continuously require new tweet examples then we would definately used DVC to keep track of which version of data when retraining the model. 
+We attempted to make use of DVC, however it turned out to be unnecessary for our project since there are no changes in data over time and therefore no need for versioning. That being said, in the case where we would continuously require new tweets or data in general that would most likely lead to model decay over time, retraining is required. When that happens, we will definitely used DVC to keep track of data versions so we make sure to retrain the model on the updated dataset, as well as keeping previous version in case the retrained model fails. 
 
 ### Question 11
 
@@ -263,7 +263,7 @@ We attempted to make use of DVC, however it turned to be unnecessary for our pro
 >
 > Answer:
 
-We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organising linebreaks and removing unsed imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. 
+We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
 
 ## Running code and tracking experiments
 
