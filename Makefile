@@ -55,11 +55,14 @@ docker_tag: requirements
 docker_push:requirements
 	$(PYTHON_INTERPRETER) docker push gcr.io/braided-destiny-374308/$(PROJECT_NAME)
 
-## Make run job
-run_job: requirements
+## Make run job train
+run_job_train: requirements
 	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
 
-
+## Make run job test
+run_job_train: requirements
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu.yaml
+	
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
