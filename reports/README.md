@@ -147,15 +147,13 @@ We used the framework Transformers, to train an NLP classifier. The goal of the 
 > *complete copy of our development enviroment, one would have to run the following commands*
 >
 > Answer:
+For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create an new environment by using `conda create -n ‘enviorment name’ python=3.9`
 
-We used GitHubXXX for managing dependencies. 
-To get a complete copy of our development environment, one would have to first fork our project repository [tweet_classification](https://github.com/MiaMiya/tweet_classification) on GitHub. Then clone the repository, which can be done with the following command:
+Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them download all the dependencies using `pip install -r requirements.txt`. 
 
-`git clone https://github.com/<username>/tweet_classification.git`
+We have our GitHub repository with all of our code, which all members will be working on their own forked version. For cloning the repository, they will call the function `git clone https://github.com/<username>/tweet_classification.git`
 
-Finally to retrieve the data, one would have to pull from google cloud storage with dvc, using the command:
-
-`dvc pull`      
+To obtain the data used for the project the command `dvc pull` will be used, which would download the raw and processed versions of the data.
 
 ### Question 5
 
@@ -170,7 +168,7 @@ Finally to retrieve the data, one would have to pull from google cloud storage w
 > *experiments.*
 > Answer:
 
-We did use the cookiecutter template to structure our code. We have used the reports and src folders. We have not used the folders docs, models, notebooks, and references. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include unit tests of our code. 
+We did use the cookiecutter template to structure our code. From the cookiecutter template we have used selected premade folders src, report and models. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include all the unit tests for our code. Besides that we customised the makefile and requirements.txt file. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilise google cloud platform we added 3 configuration files and two dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
 
 ### Question 6
 
@@ -181,7 +179,7 @@ We did use the cookiecutter template to structure our code. We have used the rep
 >
 > Answer:
 
-We did not implement any rules for code quality or format. Mainly because we were mostly just two people writing code together, hence not a lot of different writing styles. In larger projects, where many different people all wirte code it is very important to have some kind of rules or coding practices in order to keep the code easy readable and understandable for all members of the team. 
+We implemented flake8 to check if each line of code contains max 100 characters and this is enforced using black. And we remove unused imports using autoflake and sorting the remaining imports in the optimal order using isort. Thereafter we also comment our code in a consistent manner for efficient code comprehension for other users. 
 
 ## Version control
 
@@ -204,7 +202,7 @@ In total we have implemented two main tests. One for testing the data, and one f
 
 For the data test we are testing whether there are the same amount of tweets and labels, if the data are the right datatypes (tweets as strings, and labels as integers either 0 or 1), and if there are any NA's.
 
-For the model we test the shape of the output of the model.
+For the model we test the shape of the input and output of the model.
 
 ### Question 8
 
@@ -219,7 +217,7 @@ For the model we test the shape of the output of the model.
 >
 > Answer:
 
-The total code coverage of our code is XX%. As mentioned above we hve included tests for our `make_dataset.py` and our `model.py`. Even though we had 100% coverage, it is still not guaranteed that the code is error free. There could be errors in lines of code which are tested, but not captured by the tests. 
+The total code coverage of our code is 83.4%. As mentioned above we have included tests for our `make_dataset.py` and our `model.py`. However, it is not guaranteed that the code is mostly error free as there could be errors in lines of code which have not been tested or not captured by the tests. 
 
 ### Question 9
 
@@ -234,7 +232,7 @@ The total code coverage of our code is XX%. As mentioned above we hve included t
 >
 > Answer:
 
-We made very much use of especially pull requests, since everyone worked on their own forked version of the project. Such that everytime we wanted to commit changes to the code, we had to do a pull request. But we did have enough trust in each other to grant each member access to confirm his/hers own pull requests. The use of branches was then more up to the individual whether to use branches on his/hers own forked reopsitory or not. 
+We made very much use branches and especially pull requests. To avoid excessive merge conflicts, all team members worked on their own forked version of the project. Such that everytime we wanted to commit changes to the code, we had to do a pull request. But for the size of the project being quite small and we wanted to speed up the collaboration, we granted each member access to confirm his/hers own pull requests. When making changes to the code we create new branches so that it us to go back to previous working version if something breaks in the new updates. 
 
 ### Question 10
 
@@ -249,7 +247,7 @@ We made very much use of especially pull requests, since everyone worked on thei
 >
 > Answer:
 
-We did make use of DVC. For instance to push and pull our data from the cloud. 
+We attempted to make use of DVC, however it turned to be unnecessary for our project since there is no changes in data over time and therefore no need for versioning. That being said, in the case where we would continuously require new tweet examples then we would definately used DVC to keep track of which version of data when retraining the model. 
 
 ### Question 11
 
@@ -265,7 +263,7 @@ We did make use of DVC. For instance to push and pull our data from the cloud.
 >
 > Answer:
 
---- question 11 fill here ---
+We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organising linebreaks and removing unsed imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. 
 
 ## Running code and tracking experiments
 
