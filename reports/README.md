@@ -147,7 +147,6 @@ We used the framework Transformers, to train an NLP classifier. The goal of the 
 > *complete copy of our development enviroment, one would have to run the following commands*
 >
 > Answer:
-
 For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create an new environment by using `conda create -n ‘enviorment name’ python=3.9`
 
 Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them download all the dependencies using `pip install -r requirements.txt`. 
@@ -283,7 +282,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
---- question 12 fill here ---
+We implemented click commands for inputting optinonal arguments for configuring the hyperparameters. For example, for training our model we can input different learning rate, number of epochs and batch size that works in the the following way: python train_model --lr 1e-3 --epoch 10 --batch_size 64. This saves us time from having to change all the hyperparameter values manually everywhere in the code compared to if they were all implemented directly in functions. 
 
 ### Question 13
 
@@ -298,7 +297,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
---- question 13 fill here ---
+In our case we did not make use of any configuration tools such as hydra. However, we do recognize the importance of keeping clear documentation of the setup of each experiments. In the ideal case we would utilize hydra to build configuration files containing hyperparameter values and load them in the script, and then incorporating them into the script with predefined and consistent naming convention. For every experimental run we also implement logging to keep record of outputs from each experiment so that we know the timeline and how exactly the models are being trained on. To reproduce a specific experiment one would have to load in the specific configurations corresponding to that experiment and incorporate the hyperparameters into the same script. 
 
 ### Question 14
 
@@ -315,7 +314,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
---- question 14 fill here ---
+Due to time constraint and complexity of our model we have selected not to use W&B. We were not able to run a training loop with more than 1 epochs and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss is in the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some random sampled tweets in our training set such we could take a look at how the input would look like and make sure they still make sense. With W&B we could also compare performance of different models, currently we are only using BERT-base-uncased we would than be able to compare with BERTweet-base using accuracy or other metrics.
 
 ### Question 15
 
@@ -330,7 +329,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
-We build our docker images automatically using a trigger in Google Cloud everytime we pushed changes to our repository. We did though disabled this trigger at times, to not run out of ressources. Hence only building new docker images, when we found it necessary. 
+For our project we developed three images: one for training, one for inference and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud everytime we pushed changes to our repository. We did though disabled this trigger at times, to not run out of resources. Hence only building new docker images, when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris. 
 
 ### Question 16
 
@@ -345,7 +344,7 @@ We build our docker images automatically using a trigger in Google Cloud everyti
 >
 > Answer:
 
---- question 16 fill here ---
+Debugging method was dependent on group member, but majority of the times print statements was used. The print statement insures us understanding of how our input and output looks like and we could evaluate whether they makes sense for the given context. Furthermore, this allows us to understand where in the code the error is starting to occure, since at times even a wrong input will still work and it would just carry on with the incorrect input/output untill a call can not handle it. We some group members have also selected to look at the data and make sure we shuffled them and exaimning if the model is fitting the data. We decided not the create a profiling, since we majority of our problem accured when we transformed our code to could which we could not connect to the profiling.
 
 ## Working in the cloud
 
@@ -363,7 +362,7 @@ We build our docker images automatically using a trigger in Google Cloud everyti
 > Answer:
 
 We used the following services:
-- Engine. To train our model on a virtual machine.
+- Compute Engine. To train our model on a virtual machine.
 - Bucket. To store our data and models in the cloud.
 - Cloud Build (with Triggers). To automatically create new images, when GutHub changes were pushed.
 - Container Registry. To store our images.
@@ -426,8 +425,7 @@ We used the following services:
 >
 > Answer:
 
-We first tried to get a FastAPI app up and running locally, but among others due to our bad performing computers we were not able to run the model locally. 
-We then tried to deploy it with Cloud Functions, where we had a lot of issues with torch and loading the model correctly...
+--- question 22 fill here ---
 
 ### Question 23
 
@@ -442,8 +440,7 @@ We then tried to deploy it with Cloud Functions, where we had a lot of issues wi
 >
 > Answer:
 
-Nope not yet...
-It could help in the long run to inform us about the behaviour of the model. Warn us if the data or the predictions started to become screwed for instance. 
+--- question 23 fill here ---
 
 ### Question 24
 
@@ -457,14 +454,7 @@ It could help in the long run to inform us about the behaviour of the model. War
 >
 > Answer:
 
-We ended up using XXX (30) credits during the project. 
-The credits were spent on the following services:
-- Cloud Build, 0.11 credits 
-- Cloud Storage, 16.83 credits
-- Compute Engine, 4.53 credits
-- Networking, 0.17 credits
-- Vertex AI, 0.22 credits
-Hence clearly Cloud Storage has cost the most. 
+--- question 24 fill here ---
 
 ## Overall discussion of project
 
@@ -485,7 +475,7 @@ Hence clearly Cloud Storage has cost the most.
 >
 > Answer:
 
-XXX
+--- question 25 fill here ---
 
 ### Question 26
 
@@ -499,9 +489,7 @@ XXX
 >
 > Answer:
 
-We had several challenges.
-One of the biggest challenges was our older slow computers with too little memory and RAM run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Else we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer.
-Another issue was that we didn't save our data correctly in the bucket. We tried using dvc to store the data in google cloud, but this did not work, hence we had to upload the data manually to our bucket.
+--- question 26 fill here ---
 
 ### Question 27
 
