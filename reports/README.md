@@ -147,6 +147,7 @@ We used the framework Transformers, to train an NLP classifier. The goal of the 
 > *complete copy of our development enviroment, one would have to run the following commands*
 >
 > Answer:
+
 For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create an new environment by using `conda create -n ‘enviorment name’ python=3.9`
 
 Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them download all the dependencies using `pip install -r requirements.txt`. 
