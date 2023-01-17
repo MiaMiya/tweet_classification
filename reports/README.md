@@ -425,7 +425,8 @@ We used the following services:
 >
 > Answer:
 
---- question 22 fill here ---
+We first tried to get a FastAPI app up and running locally, but among others due to our bad performing computers we were not able to run the model locally. 
+We then tried to deploy it with Cloud Functions, where we had a lot of issues with torch and loading the model correctly...
 
 ### Question 23
 
@@ -440,7 +441,8 @@ We used the following services:
 >
 > Answer:
 
---- question 23 fill here ---
+Nope not yet...
+It could help in the long run to inform us about the behaviour of the model. Warn us if the data or the predictions started to become screwed for instance. 
 
 ### Question 24
 
@@ -454,7 +456,14 @@ We used the following services:
 >
 > Answer:
 
---- question 24 fill here ---
+We ended up using XXX (30) credits during the project. 
+The credits were spent on the following services:
+- Cloud Build, 0.11 credits 
+- Cloud Storage, 16.83 credits
+- Compute Engine, 4.53 credits
+- Networking, 0.17 credits
+- Vertex AI, 0.22 credits
+Hence clearly Cloud Storage has cost the most. 
 
 ## Overall discussion of project
 
@@ -475,7 +484,7 @@ We used the following services:
 >
 > Answer:
 
---- question 25 fill here ---
+XXX
 
 ### Question 26
 
@@ -489,7 +498,9 @@ We used the following services:
 >
 > Answer:
 
---- question 26 fill here ---
+We had several challenges.
+One of the biggest challenges was our older slow computers with too little memory and RAM run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Else we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer.
+Another issue was that we didn't save our data correctly in the bucket. We tried using dvc to store the data in google cloud, but this did not work, hence we had to upload the data manually to our bucket.
 
 ### Question 27
 
