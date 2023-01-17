@@ -5,7 +5,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
-PROJECT_NAME = tweet_classification
+PROJECT_NAME= tweet_classification
 PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
@@ -33,35 +33,35 @@ train: requirements
 
 ## Make predict
 predict: requirements
-	$(PYTHON_INTERPRETER) src/models/predict_model.py /gcs/tweet_classification/my_trained_model.pt /gcs/tweet_classification/processed/test_processed.npy
+	$(PYTHON_INTERPRETER) src/models/predict_model.py 
 
-## Make visualize
-visualize: requirements
-	$(PYTHON_INTERPRETER) src/visualization/visualize.py models/trained_model.pt 
+# ## Make visualize
+# visualize: requirements
+# 	$(PYTHON_INTERPRETER) src/visualization/visualize.py models/trained_model.pt 
 
-## Make docker build train
-docker_build_train: requirements
-	$(PYTHON_INTERPRETER) docker build -f train.dockerfile . -t $(PROJECT_NAME):latest
+# ## Make docker build train
+# docker_build_train: requirements
+# 	$(PYTHON_INTERPRETER) docker build -f train.dockerfile . -t $(PROJECT_NAME)/train:latest
 
-## Make docker build test
-docker_build_test: requirements
-	$(PYTHON_INTERPRETER) docker build -f test.dockerfile . -t $(PROJECT_NAME):latest
+# ## Make docker build test
+# docker_build_test: requirements
+# 	$(PYTHON_INTERPRETER) docker build -f test.dockerfile . -t $(PROJECT_NAME)/inference:latest
 
-## Make docker tag 
-docker_tag: requirements
-	$(PYTHON_INTERPRETER) docker tag tester gcr.io/braided-destiny-374308/$(PROJECT_NAME)
+# ## Make docker tag 
+# docker_tag: requirements
+# 	$(PYTHON_INTERPRETER) docker tag tester gcr.io/braided-destiny-374308/$(PROJECT_NAME)
 
-## Make docker push 
-docker_push:requirements
-	$(PYTHON_INTERPRETER) docker push gcr.io/braided-destiny-374308/$(PROJECT_NAME)
+# ## Make docker push 
+# docker_push:requirements
+# 	$(PYTHON_INTERPRETER) docker push gcr.io/braided-destiny-374308/$(PROJECT_NAME)
 
 ## Make run job train
 run_job_train: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu_train.yaml
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=train-run --config=config_cpu_train.yaml
 
 ## Make run job test
 run_job_inference: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=config_cpu_inference.yaml
+	gcloud ai custom-jobs create --region=europe-west1 --display-name=inference-run --config=config_cpu_inference.yaml
 
 ## Delete all compiled Python files
 clean:

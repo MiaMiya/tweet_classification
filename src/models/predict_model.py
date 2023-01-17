@@ -63,8 +63,8 @@ def predict(
     return prediction, probability
 
 @click.command()
-@click.argument("model_checkpoint")
-@click.argument("data_to_predict")
+@click.option("--model_checkpoint", default="/gcs/tweet_classification/my_trained_model.pt")
+@click.option("--data_to_predict", default="/gcs/tweet_classification/processed/test_processed.npy")
 def predict_main(model_checkpoint, data_to_predict):
     print("Evaluating until hitting the ceiling")
     print(model_checkpoint)
