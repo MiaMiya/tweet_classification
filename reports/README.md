@@ -382,7 +382,13 @@ We used the following services:
 >
 > Answer:
 
---- question 18 fill here ---
+We did set up a Compute Engine. The instance for the project had the following hardware: 
+- Zone: europe-west4-a
+- Machine Type: n1-standard-1
+- GPUs: 1 x NVIDIA V100
+But we did not really make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
+
+Instead we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our model for prediction.
 
 ### Question 19
 
