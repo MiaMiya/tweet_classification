@@ -461,13 +461,13 @@ We did not manage to implement monitoring of our deployed models; due to complic
 >
 > Answer:
 
-We ended up using XXX (30) credits during the project. 
+We ended up using 24.64 credits during the project. 
 The credits were spent on the following services:
-- Cloud Build, 0.11 credits 
-- Cloud Storage, 16.83 credits
-- Compute Engine, 4.53 credits
+- Cloud Build, 0.52 credits 
+- Cloud Storage, 18.85 credits
+- Compute Engine, 4.68 credits
 - Networking, 0.17 credits
-- Vertex AI, 0.22 credits
+- Vertex AI, 0.41 credits
 Hence clearly Cloud Storage has cost the most. 
 
 ## Overall discussion of project
