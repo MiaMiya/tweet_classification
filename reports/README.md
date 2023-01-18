@@ -264,7 +264,7 @@ We attempted to make use of DVC, however it turned out to be unnecessary for our
 >
 > Answer:
 
-We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
+We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports  (this was created but later removed due to errors created by it), "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
 
 ## Running code and tracking experiments
 
@@ -388,7 +388,7 @@ We did set up a Compute Engine. The instance for the project had the following h
 - GPUs: 1 x NVIDIA V100
 But we did not make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
 
-Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model.
+Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model. Hover this results in us not being able to utilize GPUs for the project and greatly increased the time spent. 
 
 ### Question 19
 
