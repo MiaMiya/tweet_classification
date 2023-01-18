@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import logging
-import pickle
 
 import click
 import matplotlib.pyplot as plt
@@ -9,9 +8,8 @@ import pandas as pd
 import torch
 from datasets import Dataset
 from dotenv import find_dotenv, load_dotenv
-from google.cloud import storage
 from sklearn import metrics
-from torch import nn, optim
+from torch import nn
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader
 from tqdm import tqdm

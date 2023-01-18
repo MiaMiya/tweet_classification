@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 import logging
-import pickle
 
 import click
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
 from datasets import Dataset
 from dotenv import find_dotenv, load_dotenv
-from sklearn import metrics
-from torch import nn, optim
-from torch.optim.lr_scheduler import LambdaLR
+from torch import nn
 from torch.utils.data import DataLoader
-from tqdm import tqdm
-from transformers import AdamW, get_linear_schedule_with_warmup
 
 from src.data.helper import collate_fn, tokenize_function
-from src.data.make_dataset import Tweets
 from src.models.model import get_model
 
 

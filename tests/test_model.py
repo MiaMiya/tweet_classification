@@ -2,8 +2,6 @@ import pytest
 import torch
 
 from src.models.model import get_model
-from tests import _PATH_DATA
-
 
 # Try
 def test_error_on_wrong_shape():

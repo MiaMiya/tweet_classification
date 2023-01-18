@@ -4,11 +4,8 @@ import logging
 import click
 import numpy as np
 import pandas as pd
-#from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-from google.cloud import storage
 from sklearn.model_selection import train_test_split
-#import torch
 from torch.utils.data import Dataset
 
 
@@ -38,13 +35,13 @@ class Tweets(Dataset):
         pd_Russian.rename(columns = {'text' : 'Tweet'}, inplace=True)
         pd_D_T.rename(columns = {'content' : 'Tweet'}, inplace=True)
         
-        ## For real use
+        # For real use
         # min_len_pd = min(len(pd_Russian), len(pd_D_T))
 
         # pd_Russian = pd_Russian.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
         # pd_D_T = pd_D_T.sample(frac = 1).iloc[:min_len_pd,:].reset_index(drop=True)
 
-        ## For making sure gcp works thus test with much smaller dataset
+        # For making sure gcp works thus test with much smaller dataset
         pd_Russian = pd_Russian.sample(frac = 1).iloc[:500,:].reset_index(drop=True)
         pd_D_T = pd_D_T.sample(frac = 1).iloc[:500,:].reset_index(drop=True)
 
@@ -71,7 +68,7 @@ class Tweets(Dataset):
 
     def load_preprocessed(self):
         try: 
-            ## For local 
+            # For local 
             # data_train = np.load(f"{self.out_folder}/train_processed.npy", allow_pickle=True)
             # data_test = np.load(f"{self.out_folder}/test_processed.npy", allow_pickle=True)
 

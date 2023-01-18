@@ -1,6 +1,5 @@
 import os.path
 
-import numpy as np
 import pytest
 
 from src.data.make_dataset import Tweets
