@@ -448,9 +448,8 @@ We then tried to deploy it with Cloud Functions, where we had a lot of issues wi
 >
 > Answer:
 
-Nope not yet...
-It could help in the long run to inform us about the behaviour of the model. Warn us if the data or the predictions started to become screwed for instance.
-
+We did not manage to implement monitoring of our deployed models; due to complications we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model need to be retrained or the model should be archived. The monitoring would a very important step in securing model’s relevance towards the data. 
+      
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
