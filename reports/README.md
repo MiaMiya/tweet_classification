@@ -315,6 +315,8 @@ In our case, we did not make use of any configuration tools such as hydra. Howev
 >
 > Answer:
 
+![image](https://user-images.githubusercontent.com/117659231/213195500-83437a22-8914-4335-a446-ae9e818b03ac.png)
+
 Due to time constraints and the complexity of our model, we have selected not to use W&B. We were not able to run a training loop with more than 1 epoch and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss on the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some randomly sampled tweets in our training set such we could take a look at how the input would look and make sure they still make sense. With W&B we could also compare the performance of different models, currently, we are only using BERT-base-uncased we would then be able to compare with BERTweet-base using accuracy or other metrics.
 
 ### Question 15
