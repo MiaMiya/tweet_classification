@@ -57,12 +57,8 @@ def read_item(tweet: str):
 
 @app.post("/upload/")
 async def cv_model(data: UploadFile = File(...)):
-    with open('tweet.txt', 'wb') as tweet:
-        content = await data.read()
-        tweet.write(content)
-        tweet.close()
-
-    tweet = open("tweet.txt", "r")
+    contents = await data.read()
+    tweet = io.BytesIO(contents)
 
     tokenized_tweet = tokenizer(
         tweet,
