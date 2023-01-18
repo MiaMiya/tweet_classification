@@ -5,6 +5,7 @@ from src.models.model import get_model
 from src.data.helper import tokenize_function
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import io 
 #my_model = pickle.loads(blob.download_as_string())
 
 BUCKET_NAME = 'tweet_classification'
