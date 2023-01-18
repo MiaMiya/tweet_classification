@@ -19,13 +19,18 @@ def predict(
     test_dl: DataLoader, 
     device: torch.device
 ):
-    """
+    '''
     The main prediction loop which will optimize a given model on a given dataset
-    :param model: The model being optimized
-    :param test_dl: The prediction dataset
-    :param device: The device to train on
-    """
 
+            Parameters:
+                    model (nn.Module): The model being optimized
+                    test_dl (DataLoader): The prediction dataset
+                    device (torch.device): The device to train on
+
+            Returns:
+                    prediction (list): List of predicted labels
+                    probability (list): List of probability for each prediction
+    '''
     with torch.no_grad():
         model.eval()
 
@@ -59,6 +64,20 @@ def predict(
 @click.option("--model_checkpoint", default="/gcs/tweet_classification/my_trained_model.pt")
 @click.option("--data_to_predict", default="/gcs/tweet_classification/processed/test_processed.npy")
 def predict_main(model_checkpoint, data_to_predict):
+    '''
+    The main prediction function, with the following tasks:
+    Loading model (with trained parameters) and data
+    Tokenizing data
+    Calling the predict() function to do predictions
+    Printing the prediction with probability of the input data_to_predict
+
+            Parameters:
+                    model_checkpoint (torch.save object): The saved model state_dict
+                    data_to_predict (file-like object): The data to predict the author of
+
+            Returns:
+                    Nothing
+    '''
     print("Evaluating until hitting the ceiling")
     print(model_checkpoint)
     
