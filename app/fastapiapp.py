@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from google.cloud import storage
-import pickle
-from src.models.model import get_model
-from src.data.helper import tokenize_function
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import io
 #my_model = pickle.loads(blob.download_as_string())
 
 BUCKET_NAME = 'tweet_classification'
@@ -18,6 +16,7 @@ blob_io = io.BytesIO(blob.download_as_string())
 model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels = 2)
 model.load_state_dict(torch.load(blob_io))
 #model.load_state_dict(torch.load(/gcs/tweet_classification/raw))
+#
 
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
