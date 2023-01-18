@@ -56,39 +56,13 @@ def read_item(tweet: str):
     return response
 
 @app.post("/upload/")
-async def cv_model(data: UploadFile = File(...)):
-    contents = await data.read()
-    tweet = io.BytesIO(contents)
-
-    tokenized_tweet = tokenizer(
-        tweet,
-        max_length=512,
-        padding="max_length",
-        truncation=True,
-        return_tensors="pt",
-    )
-    outputs = model(
-        input_ids=tokenized_tweet["input_ids"],
-        attention_mask=tokenized_tweet["attention_mask"],
-    )
-
-    log_probs = outputs.logits[0]  ## input CR
-    probs = log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()
-    if probs[0] > 0.5:
-        pred = "Russian"
-        prob = str(round(probs[0], 2))
-    else:
-        pred = "Trump"
-        prob = str(round(probs[1], 2))
-
-    response = {"Prediction": pred, "With probability": prob, "Tweet": tweet}
-    return response
-
-@app.post("/upload2/")
-async def cv_model(data: UploadFile = File(...)):
-    contents = await data.read()
-    s = str(contents,'utf-8')
-    tweet = io.BytesIO(s)
+async def txt_tweet(data: UploadFile = File(...)):
+    with open('tweet.txt', 'wb') as tweet:
+        content = await data.read()
+        tweet.write(content)
+        tweet.close()
+    
+    tweet = open("tweet.txt", "r").read()
 
     tokenized_tweet = tokenizer(
         tweet,
