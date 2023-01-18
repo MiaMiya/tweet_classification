@@ -148,11 +148,11 @@ We used the framework Transformers, to train an NLP classifier. The goal of the 
 >
 > Answer:
 
-For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create an new environment by using `conda create -n ‘enviorment name’ python=3.9`
+For a new team member to have a compatible environment, we start by informing them we are using python 3.9. We would ask them to create a new environment by using `conda create -n ‘environment name’ python=3.9`
 
-Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them download all the dependencies using `pip install -r requirements.txt`. 
+Furthermore, there is a file called requirements which contains all the used libraries and dependencies for this project. Thus, we expect them to download all the dependencies using `pip install -r requirements.txt`. 
 
-We have our GitHub repository with all of our code, which all members will be working on their own forked version. For cloning the repository, they will call the function `git clone https://github.com/<username>/tweet_classification.git`
+We have our GitHub repository with all of our code, and all members will be working on their own forked version. For cloning the repository, they will call the function `git clone https://github.com/<username>/tweet_classification.git`
 
 To obtain the data used for the project the command `dvc pull` will be used, which would download the raw and processed versions of the data.
 
@@ -169,7 +169,7 @@ To obtain the data used for the project the command `dvc pull` will be used, whi
 > *experiments.*
 > Answer:
 
-We did use the cookiecutter template to structure our code. From the cookiecutter template we have used selected premade folders src, report and models. Then we have added a .dvc folder to handle data storage and version control. Furthermore we added a tests folders to include all the unit tests for our code. Besides that we customised the makefile and requirements.txt file. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilise google cloud platform we added 3 configuration files and two dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
+We did use the cookiecutter template to structure our code. From the cookiecutter template, we have used selected premade folders src, report and models. Then we added a .dvc folder to handle data storage and version control. Furthermore, we added a tests folder to include all the unit tests for our code. Besides that, we customized the makefile and requirements.txt files. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilize the google cloud platform we added 3 configuration files and two dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
 
 ### Question 6
 
@@ -180,7 +180,7 @@ We did use the cookiecutter template to structure our code. From the cookiecutte
 >
 > Answer:
 
-We implemented flake8 to check if each line of code contains max 100 characters and this is enforced using black. And we remove unused imports using autoflake and sorting the remaining imports in the optimal order using isort. Thereafter we also comment our code in a consistent manner for efficient code comprehension for other users. 
+We implemented flake8 to check if each line of code contains max 100 characters and this is enforced using black. And we remove unused imports using autoflake and sort the remaining imports in the optimal order using isort. Thereafter we also commented our code in a consistent manner for efficient code comprehension for other users. 
 
 ## Version control
 
@@ -199,11 +199,11 @@ We implemented flake8 to check if each line of code contains max 100 characters 
 >
 > Answer:
 
-In total we have implemented two main tests. One for testing the data, and one for testing the model.
+In total, we have implemented two main tests. One for testing the data, and one for testing the model.
 
-For the data test we are testing whether there are the same amount of tweets and labels, if the data are the right datatypes (tweets as strings, and labels as integers either 0 or 1), and if there are any NA's.
+For the data test, we are testing whether there are the same amount of tweets and labels if the data are the right datatypes (tweets as strings, and labels as integers either 0 or 1) and if there are any NAs.
 
-For the model we test the shape of the input and output of the model.
+For the model, we test the shape of the input and output of the model.
 
 ### Question 8
 
@@ -218,7 +218,7 @@ For the model we test the shape of the input and output of the model.
 >
 > Answer:
 
-The total code coverage of our code is 83.4%. As mentioned above we have included tests for our `make_dataset.py` and our `model.py`. However, it is not guaranteed that the code is mostly error free as there could be errors in lines of code which have not been tested or not captured by the tests, such as if we only test for inpute type but not if there is an input. There are other python documents such as predict_model.py and train_model.py which we did not create tests for, thus these scripts are not tested. And this place further constrain on our code coverage, thereby reliability of how error free the source codes are.  
+The total code coverage of our code is 83.4%. As mentioned above we have included tests for our `make_dataset.py` and our `model.py`. However, it is not guaranteed that the code is mostly error-free as there could be errors in lines of code that have not been tested or not captured by the tests, such as if we only test for input type but not if there is an input. There are other python documents such as predict_model.py and train_model.py which we did not create tests for, thus these scripts are not tested. And this place further constraints on our code coverage, thereby the reliability of how error-free the source codes are.  
 
 ### Question 9
 
@@ -233,7 +233,7 @@ The total code coverage of our code is 83.4%. As mentioned above we have include
 >
 > Answer:
 
-We made very much use branches and especially pull requests. To avoid excessive merge conflicts, all team members worked on their own forked version of the project. Such that every time we wanted to commit changes to the code, we had to do a pull request. But for the size of the project being quite small and we wanted to speed up the collaboration, we granted each member access to confirm his/hers own pull requests. When making changes to the code we create new branches so that it us to go back to previous working version if something breaks in the new updates. 
+We made very much use of branches and especially pull requests. To avoid excessive merge conflicts, all team members worked on their own forked version of the project. Such that every time we wanted to commit changes to the code, we had to do a pull request. But for the size of the project which is quite small and we wanted to speed up the collaboration, we granted each member access to confirm his/hers own pull requests. When making changes to the code we created new branches such that it allowed us to go back to the previous working version if something broke in the new updates. 
 
 ### Question 10
 
@@ -248,7 +248,7 @@ We made very much use branches and especially pull requests. To avoid excessive 
 >
 > Answer:
 
-We attempted to make use of DVC, however it turned out to be unnecessary for our project since there are no changes in data over time and therefore no need for versioning. That being said, in the case where we would continuously require new tweets or data in general that would most likely lead to model decay over time, retraining is required. When that happens, we will definitely used DVC to keep track of data versions so we make sure to retrain the model on the updated dataset, as well as keeping previous version in case the retrained model fails. 
+We attempted to make use of DVC, however, it turned out to be unnecessary for our project since there are no changes in data over time and therefore no need for versioning. That being said, in the case where we would continuously require new tweets or data in general that would most likely lead to model decay over time, retraining is required. When that happens, we will definitely use DVC to keep track of data versions so we make sure to retrain the model on the updated dataset, as well as keeping the previous version in case the retrained model fails. 
 
 ### Question 11
 
@@ -264,7 +264,7 @@ We attempted to make use of DVC, however it turned out to be unnecessary for our
 >
 > Answer:
 
-We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports  (this was created but later removed due to errors created by it), "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
+We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports  (this was created but later removed due to errors created by it), "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely Windows, Mac, and Linux. We selected these three because they cover the majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9 since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple PyTorch versions are being tested for which are 1.11.9, 1.12.0, and 1.13.0. We have selected multiple PyTorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple PyTorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected to use caching to reduce redundant installation time and improve efficiency.
 
 ## Running code and tracking experiments
 
@@ -283,7 +283,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
-We implemented click commands for inputting optinonal arguments for configuring the hyperparameters. For example, for training our model we can input different learning rate, number of epochs and batch size that works in the the following way: python train_model --lr 1e-3 --epoch 10 --batch_size 64. This saves us time from having to change all the hyperparameter values manually everywhere in the code compared to if they were all implemented directly in functions. 
+We implemented click commands for inputting optional arguments for configuring the hyperparameters. For example, for training our model we can input different learning rate, number of epochs, and batch size that works in the following way: python train_model --lr 1e-3 --epoch 10 --batch_size 64. This saves us time from having to change all the hyperparameter values manually everywhere in the code compared to if they were all implemented directly in functions. 
 
 ### Question 13
 
@@ -298,7 +298,7 @@ We implemented click commands for inputting optinonal arguments for configuring 
 >
 > Answer:
 
-In our case we did not make use of any configuration tools such as hydra. However, we do recognize the importance of keeping clear documentation of the setup of each experiments. In the ideal case we would utilize hydra to build configuration files containing hyperparameter values and load them in the script, and then incorporating them into the script with predefined and consistent naming convention. For every experimental run we also implement logging to keep record of outputs from each experiment so that we know the timeline and how exactly the models are being trained on. To reproduce a specific experiment one would have to load in the specific configurations corresponding to that experiment and incorporate the hyperparameters into the same script. 
+In our case, we did not make use of any configuration tools such as hydra. However, we do recognize the importance of keeping clear documentation of the setup of each experiment. In the ideal case, we would utilize hydra to build configuration files containing hyperparameter values and load them in the script, and then incorporate them into the script with the predefined and consistent naming convention. For every experimental run, we also implement logging to keep a record of outputs from each experiment so that we know the timeline and how exactly the models are being trained. To reproduce a specific experiment one would have to load in the specific configurations corresponding to that experiment and incorporate the hyperparameters into the same script. 
 
 ### Question 14
 
@@ -315,7 +315,7 @@ In our case we did not make use of any configuration tools such as hydra. Howeve
 >
 > Answer:
 
-Due to time constraint and complexity of our model we have selected not to use W&B. We were not able to run a training loop with more than 1 epochs and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss is in the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some random sampled tweets in our training set such we could take a look at how the input would look like and make sure they still make sense. With W&B we could also compare performance of different models, currently we are only using BERT-base-uncased we would then be able to compare with BERTweet-base using accuracy or other metrics.
+Due to time constraints and the complexity of our model, we have selected not to use W&B. We were not able to run a training loop with more than 1 epoch and have not had the opportunity to play with other parameters such as learning rate even after greatly reducing the amount of data. We would have implemented logging and creation of the loss graph, where we have the loss on the y-axis and epochs on the x-axis, which will give us a visual understanding of how the training is progressing. We would also save other metrics such as accuracy, this will give us a numerical understanding of how well the model is performing. To further evaluate our model it would also be beneficial to have a validation set included in our loss plot to see and compare loss for training and validation set which will insure our model is not overfitting. We could also save some randomly sampled tweets in our training set such we could take a look at how the input would look and make sure they still make sense. With W&B we could also compare the performance of different models, currently, we are only using BERT-base-uncased we would then be able to compare with BERTweet-base using accuracy or other metrics.
 
 ### Question 15
 
@@ -330,7 +330,7 @@ Due to time constraint and complexity of our model we have selected not to use W
 >
 > Answer:
 
-For our project we developed three images: one for training, one for inference and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud every time we pushed changes to our repository. We did though disable this trigger at times, to not run out of resources. Hence only building new docker images when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris.
+For our project, we developed three images: one for training, one for inference, and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud every time we pushed changes to our repository. At times we did though disable the trigger to not run out of resources. Hence only building new docker images when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris.
       
 ### Question 16
 
@@ -345,7 +345,7 @@ For our project we developed three images: one for training, one for inference a
 >
 > Answer:
 
-Debugging method was dependent on group member, but majority of the times print statements was used. The print statement insures us understanding of how our input and output looks like and we could evaluate whether they make sense for the given context. Furthermore, this allows us to understand where in the code the error is starting to occur, since at times even a wrong input will still work, and it would just carry on with the incorrect input/output until a call cannot handle it. We some group members have also selected to look at the data and make sure we shuffled them and examining if the model is fitting the data. We decided not the create a profiling, since we majority of our problem occurred when we transformed our code to could which we could not connect to the profiling.
+The debugging method was dependent on each group member, but the majority of the time print statements were used. The print statement ensures us an understanding of what our input and output look like and we could evaluate whether they make sense for the given context. Furthermore, this allows us to understand where in the code the error is starting to occur, since at times even a wrong input will still work, and it would just carry on with the incorrect input/output until a call cannot handle it. Some group members have also selected to look at the data and make sure we shuffled them and examined if the model is fitting the data. We decided not the create profiling since the majority of our problems occurred when we transformed our code to could which we could not connect to the profiling.
 
 ## Working in the cloud
 
@@ -388,7 +388,7 @@ We did set up a Compute Engine. The instance for the project had the following h
 - GPUs: 1 x NVIDIA V100
 But we did not make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
 
-Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model. Hover this results in us not being able to utilize GPUs for the project and greatly increased the time spent. 
+Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model. However, this resulted in us not being able to utilize GPUs for the project and greatly increased the time spent. 
 
 ### Question 19
 
@@ -432,7 +432,7 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-We managed to deploy with both cloud functions and cloud runs. We initially deployed with cloud functions (because of technical issues see Q26). For the purpose of this project, it is well suited given the fact that our application only needs to take a string as input and then output a prediction. However, if we want to add more functionality it’s preferred to use containers and Cloud Run. This is precisely what we did and in order to invoke the service the user can either use the makefile (when in root repository) with make tweet=<some tweet> api or with curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/<some tweet>’ -H 'accept: application/json'
+We managed to deploy with both cloud functions and cloud runs. We initially deployed with cloud functions (because of technical issues see Q26). For the purpose of this project, it is well suited given the fact that our application only needs to take a string as input and then output a prediction. However, if we want to add more functionality it’s preferred to use containers and Cloud Run. This is precisely what we did and to invoke the service the user can either use the makefile (when in root repository) with make tweet=<some tweet> api or with curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/<some tweet>’ -H 'accept: application/json'
 
 ### Question 23
 
@@ -447,7 +447,7 @@ We managed to deploy with both cloud functions and cloud runs. We initially depl
 >
 > Answer:
 
-We did not manage to implement monitoring of our deployed models; due to complications we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model need to be retrained or the model should be archived. The monitoring would a very important step in securing model’s relevance towards the data. 
+We did not manage to implement monitoring of our deployed models; due to complications, we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or if the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model needs to be retrained or if the model should be archived. The monitoring would be a very important step in securing the model’s relevance to the data. 
       
 ### Question 24
 
@@ -491,11 +491,11 @@ Hence clearly Cloud Storage has cost the most.
 
 ![system_architecture](https://user-images.githubusercontent.com/117659231/213176803-237f51ec-26b9-41ec-9b82-efc5adcc7bc2.svg)
 As seen in the image above we are utilizing 14 services. 
-First of all on the right hand side is our local setup, where we start with the pytorch application as our hub. From there we create our virtual environment using conda with specific python version (3.9). 
-The next step is to create a cookiecutter code structure in order for us to have a clear overview and organized collection of code and documentation. This folder is then uploaded to github which ensures collaboration and version control. 
-For our data we first created a local data storage in the folder data (in cookie cutter structure). To create version control for our data we selected using the dvc service so that we can push and pull our data to cloud buckets. 
+First of all on the right-hand side is our local setup, where we start with the PyTorch application as our hub. From there we create our virtual environment using conda with a specific python version (3.9). 
+The next step is to create a cookiecutter code structure in order for us to have a clear overview and organized collection of code and documentation. This folder is then uploaded to GitHub which ensures collaboration and version control. 
+For our data, we first created local data storage in the folder data (in a cookiecutter structure). To create version control for our data we selected using the dvc service so that we can push and pull our data to cloud buckets. 
 The final service we are using locally is docker to containerize our project so it is reproducible.  
-For scalability and availability we established connections to the selected cloud services, google cloud platform. In other words, whenever we update our main branch in github it would automatic trigger a new build in cloud which is stored as images in the container registry. For user to interact with our deployed model we will be utilizing fastapi.   
+For scalability and availability, we established connections to the selected cloud services on the google cloud platform. In other words, whenever we update our main branch in GitHub it would automatically trigger a new build in the cloud which is stored as images in the container registry. For a user to interact with our deployed model we will be utilizing fastapi.   
 
 ### Question 26
 
@@ -510,9 +510,9 @@ For scalability and availability we established connections to the selected clou
 > Answer:
 
 We had several challenges.
-One of the biggest challenges was our older slow computers with too little memory and RAM to run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Eventually we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer time. 
-Another issue was that we had difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be that dvc saves the data in uncomprehensive path names thus proving to be almost impossible to define a proper file path. Therefore, we had to make the decision of doing a quick fix by uploading the data manually to cloud buckets in order to get the models up and running. But it is to note that this would lead to no data version control which is a great limitation to our project. 
-Another big challenge was that we could not utilise gpu resources on cloud due to resource limitations for the scope of the course. And unfortunately we are using transformers models which is known to be very large and time consuming to fine tune. This resulted in extremely long training time with even significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 datapoints. 
+One of the biggest challenges was our older slow computers with too little memory and RAM to run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Eventually, we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took a significantly longer time. 
+Another issue was that we had difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be that dvc saves the data in uncomprehensive path names thus proving to be almost impossible to define a proper file path. Therefore, we had to decide on doing a quick fix by uploading the data manually to cloud buckets to get the models up and running. But it is to note that this would lead to no data version control which is a great limitation to our project. 
+Another big challenge was that we could not utilize GPU resources on the cloud due to resource limitations for the scope of the course. And unfortunately, we are using transformers models which are known to be very large and time-consuming to fine-tune. This resulted in an extremely long training time with an even significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 data points. 
 
 ### Question 27
 
@@ -529,7 +529,7 @@ Another big challenge was that we could not utilise gpu resources on cloud due t
 >
 > Answer:
 
-Students s183909 and s183998 were mainly in charge of setting up the model, and writing the training and prediction scripts etc. 
+Students s183909 and s183998 were mainly in charge of setting up the model and writing the training and prediction scripts etc. 
 Students s174479 and s175393 were mainly in charge of setting up the project in the cloud and deploying the model etc.
 All along we communicated, discussed our work helped each other out with challenges. 
 Regarding the report we contributed equally, each answering different questions and discussing some together.  
