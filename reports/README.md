@@ -400,7 +400,6 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 > Answer:
 
 #<img width="1004" alt="Skærmbillede 2023-01-18 kl  15 15 08" src="https://user-images.githubusercontent.com/117659231/213194100-4721ef43-fe49-4d4b-9ebf-5d45c9dd5b13.png">
-<img width="1004" alt="test" src="https://user-images.githubusercontent.com/117659231/213194100-4721ef43-fe49-4d4b-9ebf-5d45c9dd5b13.png">
 <img width="1012" alt="Skærmbillede 2023-01-18 kl  15 15 27" src="https://user-images.githubusercontent.com/117659231/213194159-db6312d7-4bdb-49e5-a15b-b1e9264918e8.png">
 
 ### Question 20
