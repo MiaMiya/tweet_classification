@@ -13,11 +13,13 @@ MODEL_FILE = 'my_trained_model.pt'
 client = storage.Client()
 bucket = client.get_bucket(BUCKET_NAME)
 blob = bucket.get_blob(MODEL_FILE)
-tokenized_dataset = tweet.map(tokenize_function, batched=True, remove_columns=['text'])
+blob_io = io.BytesIO(blob.download_as_string())
 
 model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels = 2)
+model.load_state_dict(torch.load(blob_io))
+#model.load_state_dict(torch.load(/gcs/tweet_classification/raw))
 
-model.load_state_dict(torch.load(blob.download_as_string()))
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 app = FastAPI()
 
@@ -28,17 +30,20 @@ def read_root():
 
 @app.get("/tweet/{tweet}")
 def read_item(tweet: str):
-
+    tokenized_tweet = tokenizer(tweet, max_length=512, padding='max_length', truncation=True, return_tensors='pt')
     outputs = model(
-                input_ids=tokenized_dataset['input_ids'],
-                attention_mask=tokenized_dataset['attention_mask'])
+                input_ids=tokenized_tweet['input_ids'],
+                attention_mask=tokenized_tweet['attention_mask'])
     log_probs = outputs.logits[0] ## input CR
     probs = log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()
-    if probs <0.5:
+    if probs[0] > 0.5:
         pred = 'Russian'
+        prob = str(round(probs[0],2))
     else:
-    #     pred = 'Trump'
+        pred = 'Trump'
+        prob = str(round(probs[1],2))
 
-    response = {'tweet' : tweet,
-                'Prediction': 'tokenized_dataset'}
+    response = {'Prediction': pred,
+                  'With probability': prob,
+                  'Tweet' : tweet}
     return response
