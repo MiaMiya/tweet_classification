@@ -34,8 +34,8 @@ end of the project.</p>
 <li>[x] Fill out the <code>make_dataset.py</code> file such that it downloads whatever data you need and</li>
 <li>[x] Add a model file and a training script and get that running</li>
 <li>[x] Remember to fill out the <code>requirements.txt</code> file with whatever dependencies that you are using</li>
-<li>[ ] Remember to comply with good coding practices (<code>pep8</code>) while doing the project</li>
-<li>[ ] Do a bit of code typing and remember to document essential parts of your code</li>
+<li>[x] Remember to comply with good coding practices (<code>pep8</code>) while doing the project</li>
+<li>[x] Do a bit of code typing and remember to document essential parts of your code</li>
 <li>[x] Setup version control for your data or part of your data</li>
 <li>[x] Construct one or multiple docker files for your code</li>
 <li>[ ] Build the docker files locally and make sure they work as intended</li>
@@ -199,7 +199,7 @@ corporate and increase the quality of your code.</p>
 <em>... . In particular for our ..., we used ... .An example of a triggered workflow can be seen here: <weblink></em></p>
 <p>Answer:</p>
 </blockquote>
-<p>We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions &lt;3.9 were found to result in many conflicts with dvc and versions &gt; 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.</p>
+<p>We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports  (this was created but later removed due to errors created by it), "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions &lt;3.9 were found to result in many conflicts with dvc and versions &gt; 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.</p>
 <h2>Running code and tracking experiments</h2>
 <blockquote>
 <p>In the following section we are interested in learning more about the experimental setup for running your code and
@@ -294,7 +294,7 @@ especially the reproducibility of your experiments.</p>
 - Machine Type: n1-standard-1
 - GPUs: 1 x NVIDIA V100
 But we did not make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.</p>
-<p>Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model.</p>
+<p>Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model. Hover this results in us not being able to utilize GPUs for the project and greatly increased the time spent. </p>
 <h3>Question 19</h3>
 <blockquote>
 <p><strong>Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.</strong>
@@ -339,8 +339,7 @@ We then tried to deploy it with Cloud Functions, where we had a lot of issues wi
 <em>measure ... and ... that would inform us about this ... behaviour of our application.</em></p>
 <p>Answer:</p>
 </blockquote>
-<p>Nope not yet...
-It could help in the long run to inform us about the behaviour of the model. Warn us if the data or the predictions started to become screwed for instance.</p>
+<p>We did not manage to implement monitoring of our deployed models; due to complications we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model need to be retrained or the model should be archived. The monitoring would a very important step in securing model’s relevance towards the data. </p>
 <h3>Question 24</h3>
 <blockquote>
 <p><strong>How many credits did you end up using during the project and what service was most expensive?</strong></p>
@@ -373,7 +372,13 @@ Hence clearly Cloud Storage has cost the most. </p>
 <em>Whenever we commit code and puch to github, it auto triggers ... and ... . From there the diagram shows ...</em></p>
 <p>Answer:</p>
 </blockquote>
-<p>--- question 25 fill here ---</p>
+<p><img alt="system_architecture" src="https://user-images.githubusercontent.com/117659231/213176803-237f51ec-26b9-41ec-9b82-efc5adcc7bc2.svg" />
+As seen in the image above we are utilizing 14 services. 
+First of all on the right hand side is our local setup, where we start with the pytorch application as our hub. From there we create our virtual environment using conda with specific python version (3.9). 
+The next step is to create a cookiecutter code structure in order for us to have a clear overview and organized collection of code and documentation. This folder is then uploaded to github which ensures collaboration and version control. 
+For our data we first created a local data storage in the folder data (in cookie cutter structure). To create version control for our data we selected using the dvc service so that we can push and pull our data to cloud buckets. 
+The final service we are using locally is docker to containerize our project so it is reproducible.<br />
+For scalability and availability we established connections to the selected cloud services, google cloud platform. In other words, whenever we update our main branch in github it would automatic trigger a new build in cloud which is stored as images in the container registry. For user to interact with our deployed model we will be utilizing fastapi.   </p>
 <h3>Question 26</h3>
 <blockquote>
 <p><strong>Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these</strong>
@@ -384,8 +389,9 @@ Hence clearly Cloud Storage has cost the most. </p>
 <p>Answer:</p>
 </blockquote>
 <p>We had several challenges.
-One of the biggest challenges was our older slow computers with too little memory and RAM run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Else we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer.
-Another issue was that we didn't save our data correctly in the bucket. We tried using dvc to store the data in google cloud, but this did not work, hence we had to upload the data manually to our bucket.</p>
+One of the biggest challenges was our older slow computers with too little memory and RAM to run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Eventually we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer time. 
+Another issue was that we had difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be that dvc saves the data in uncomprehensive path names thus proving to be almost impossible to define a proper file path. Therefore, we had to make the decision of doing a quick fix by uploading the data manually to cloud buckets in order to get the models up and running. But it is to note that this would lead to no data version control which is a great limitation to our project. 
+Another big challenge was that we could not utilise gpu resources on cloud due to resource limitations for the scope of the course. And unfortunately we are using transformers models which is known to be very large and time consuming to fine tune. This resulted in extremely long training time with even significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 datapoints. </p>
 <h3>Question 27</h3>
 <blockquote>
 <p><strong>State the individual contributions of each team member. This is required information from DTU, because we need to</strong>
