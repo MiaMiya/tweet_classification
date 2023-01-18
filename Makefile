@@ -36,9 +36,14 @@ train: requirements
 predict: requirements
 	$(PYTHON_INTERPRETER) src/models/predict_model.py 
 	
-## Predict tweet
+## Predict tweet str
 api: 
 	curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/'$(tweet) -H 'accept: application/json'
+
+## Predict tweet txt file
+api: 
+	curl -X 'POST' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/upload/' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'data=@$(txt);type=text/plain'
+
 
 ## test
 do :
