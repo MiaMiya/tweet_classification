@@ -5,8 +5,9 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
-PROJECT_NAME= tweet_classification
+PROJECT_NAME = tweet_classification
 PYTHON_INTERPRETER = python3
+REGION = europe-west1
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -57,15 +58,15 @@ predict: requirements
 
 ## Make run job train
 run_job_train: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=train-run --config=config_cpu_train.yaml
+	gcloud ai custom-jobs create --region=$(REGION) --display-name=train-run --config=config_cpu_train.yaml
 
 ## Make run job test
 run_job_inference: requirements
-	gcloud ai custom-jobs create --region=europe-west1 --display-name=inference-run --config=config_cpu_inference.yaml
+	gcloud ai custom-jobs create --region=$(REGION) --display-name=inference-run --config=config_cpu_inference.yaml
 
 ## Make deploy api
-deploy_api:requirements
-	gcloud run deploy tweet-classification-app --image gcr.io/braided-destiny-374308/$(PROJECT_NAME)/api:latest --platform managed --region europe-west1 --allow-unauthenticated
+deploy_api: requirements
+	gcloud run deploy tweet-classification-app --region=$(REGION) --image gcr.io/braided-destiny-374308/$(PROJECT_NAME)/api:latest --platform managed --allow-unauthenticated --memory 8Gi --cpu 2
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
