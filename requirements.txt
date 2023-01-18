@@ -21,3 +21,4 @@ google
 fastapi
 google-cloud-storage
 uvicorn
+python-multipart
