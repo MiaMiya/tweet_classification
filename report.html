@@ -1,0 +1,85 @@
+<h1>ation of Trump and Russian Troll Tweets</h1>
+<h3>Overall goal of the project</h3>
+<p>The goal of our project is to classify if a tweet was made by Trump or a Russian troll account. </p>
+<h3>What framework are you going to use (PyTorch Image Models, Transformer, Pytorch-Geometrics)</h3>
+<p>The input for our models is going to be text strings, thus Transformer framework will be used.</p>
+<h3>How to you intend to include the framework into your project</h3>
+<p>The Transformer framework provide various pre-trained model and we will be selecting one of these to be the basis of our model. This will be included in our cookie cutter approach. </p>
+<h3>What data are you going to run on (initially, may change)</h3>
+<p>The data we have selected is tweets from two different Kaggle sources <a href="https://www.kaggle.com/datasets/austinreese/trump-tweets?resource=download">Trump tweets</a> and <a href="https://www.kaggle.com/datasets/vikasg/russian-troll-tweets?select=tweets.csv">Russian troll tweets</a>. For each dataset we will include just the tweet and the date of the tweet. Initially we will only use the tweet (text) for the model. Then we will add a label to each tweet whether Trump or a Russian Troll is the author, based on which dataset the tweet comes from.   </p>
+<h3>What deep learning models do you expect to use</h3>
+<p>We expect to used BERT model with focus on <a href="https://huggingface.co/bert-base-uncased">BERT-base-uncased</a>, if time allows, we will also checkout <a href="https://huggingface.co/vinai/bertweet-base">BERTweet-base</a> which is trained on twitter data. </p>
+<h2>Project Organization</h2>
+<pre><code>├── LICENSE
+├── Makefile           &lt;- Makefile with commands like `make data` or `make train`
+├── README.md          &lt;- The top-level README for developers using this project.
+├── data
+│   ├── processed      &lt;- The final, canonical data sets for modeling.
+│   └── raw            &lt;- The original, immutable data dump.
+│
+├── models             &lt;- Trained and serialized models, model predictions, or model summaries
+│
+├── reports            &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│   ├── README.md      &lt;- Exam questions with checklist for the project
+│   │
+│   ├── report.html    &lt;- html version of the report
+│   │
+│   ├── report.py      &lt;- Python file for testing contrains on the report format
+│   │
+│   └── figures        &lt;- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze &gt; requirements.txt`
+│
+├── requirements_tests.txt   &lt;- The requirements file for reproducing the tests environment, e.g.
+│
+├── setup.py           &lt;- makes project pip installable (pip install -e .) so src can be imported
+├── src                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes src a Python module
+│   │
+│   ├── data           &lt;- Scripts to download or generate data
+│   │   ├── make_dataset.py
+│   │   └── helper.py 
+│   │
+│   ├── models         &lt;- Scripts to train models and then use trained models to make
+│   │   │                 predictions
+│   │   ├── model.py
+│   │   ├── predict_model.py
+│   │   └── train_model.py
+│
+├── .dvc               &lt;- DVC for the project
+│   └── config         &lt;- Configuration for dvc 
+│  
+├── tests              &lt;- Tests for code intergration 
+│   ├── __init__.py    &lt;- Makes tests a Python module
+│   │
+│   ├── test_data.yaml &lt;- Fort testing the training data
+│   │
+│   └── test_model.py  &lt;- For testing the model 
+│
+├── .github            &lt;- For creation of CI in github
+│   ├── workflows           &lt;- Scripts to download or generate data
+│   │   ├── caching.yaml    &lt;- Test in different operation system and versions 
+│   │   ├── isort.yaml      &lt;- Sorting and removing unused imports 
+│   │   └── flake8.yaml     &lt;- Create test to compile iwth pep8
+│
+├── app                &lt;- Fastapi for deployment 
+│   ├── __init__.py    &lt;- Makes app a Python module
+│   │
+│   └── fastapiapp.py  &lt;- python code for createing the app using fastapi
+│
+├── app.dockerfile     &lt;- Docker file for fastapi
+├── test.dockerfile    &lt;- Docker file for inference
+├── train.dockerfile   &lt;- Docker file for training
+├── couldbuild.yaml    &lt;- Command for building docker images in cloud
+├── config_cpu_fast.yaml    &lt;- Configuring the run in cloud using cpu for fast api
+├── config_cpu_inference.yaml   &lt;- Configuring the run in cloud using cpu for inference
+├── config_cpu_trian.yaml   &lt;- Configuring the run in cloud using cpu for training model
+├── data.dvc           &lt;- Information on data in dvc
+└── tox.ini            &lt;- tox file with settings for running tox; see tox.readthedocs.io
+</code></pre>
+<hr />
+<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+<h2>Checklist and report</h2>
+<p>See <a href="https://github.com/MiaMiya/tweet_classification/tree/main/reports">reports/README.md</a></p>
