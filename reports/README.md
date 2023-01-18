@@ -490,7 +490,7 @@ Hence clearly Cloud Storage has cost the most.
 >
 > Answer:
 
---- question 25 fill here ---
+![system_architecture](https://user-images.githubusercontent.com/117659231/213176803-237f51ec-26b9-41ec-9b82-efc5adcc7bc2.svg)
 
 ### Question 26
 
