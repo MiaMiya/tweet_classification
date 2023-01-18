@@ -506,8 +506,9 @@ Hence clearly Cloud Storage has cost the most.
 > Answer:
 
 We had several challenges.
-One of the biggest challenges was our older slow computers with too little memory and RAM run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Else we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer.
-Another issue was that we didn't save our data correctly in the bucket. We tried using dvc to store the data in google cloud, but this did not work, hence we had to upload the data manually to our bucket.
+One of the biggest challenges was our older slow computers with too little memory and RAM to run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Eventually we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took significantly longer time. 
+Another issue was that we had difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be that dvc saves the data in uncomprehensive path names thus proving to be almost impossible to define a proper file path. Therefore, we had to make the decision of doing a quick fix by uploading the data manually to cloud buckets in order to get the models up and running. But it is to note that this would lead to no data version control which is a great limitation to our project. 
+Another big challenge was that we could not utilise gpu resources on cloud due to resource limitations for the scope of the course. And unfortunately we are using transformers models which is known to be very large and time consuming to fine tune. This resulted in extremely long training time with even significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 datapoints. 
 
 ### Question 27
 
