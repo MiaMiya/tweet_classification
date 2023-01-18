@@ -24,26 +24,24 @@ Project Organization
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   ├── README.md      <- Exam questions with checklist for the project
+    │   │
+    │   ├── report.html    <- html version of the report
+    │   │
+    │   ├── report.py      <- Python file for testing contrains on the report format
+    │   │
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
+    │
+    ├── requirements_tests.txt   <- The requirements file for reproducing the tests environment, e.g.
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
@@ -53,17 +51,41 @@ Project Organization
     │   │   ├── make_dataset.py
     │   │   └── helper.py 
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
     │   │   │                 predictions
+    │   │   ├── model.py
     │   │   ├── predict_model.py
     │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
     │
+    ├── .dvc               <- DVC for the project
+    │   └── config         <- Configuration for dvc 
+    │  
+    ├── tests              <- Tests for code intergration 
+    │   ├── __init__.py    <- Makes tests a Python module
+    │   │
+    │   ├── test_data.yaml <- Fort testing the training data
+    │   │
+    │   └── test_model.py  <- For testing the model 
+    │
+    ├── .github            <- For creation of CI in github
+    │   ├── workflows           <- Scripts to download or generate data
+    │   │   ├── caching.yaml    <- Test in different operation system and versions 
+    │   │   ├── isort.yaml      <- Sorting and removing unused imports 
+    │   │   └── flake8.yaml     <- Create test to compile iwth pep8
+    │
+    ├── app                <- Fastapi for deployment 
+    │   ├── __init__.py    <- Makes app a Python module
+    │   │
+    │   └── fastapiapp.py  <- python code for createing the app using fastapi
+    │
+    ├── app.dockerfile     <- Docker file for fastapi
+    ├── test.dockerfile    <- Docker file for inference
+    ├── train.dockerfile   <- Docker file for training
+    ├── couldbuild.yaml    <- Command for building docker images in cloud
+    ├── config_cpu_fast.yaml    <- Configuring the run in cloud using cpu for fast api
+    ├── config_cpu_inference.yaml   <- Configuring the run in cloud using cpu for inference
+    ├── config_cpu_trian.yaml   <- Configuring the run in cloud using cpu for training model
+    ├── data.dvc           <- Information on data in dvc
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 
