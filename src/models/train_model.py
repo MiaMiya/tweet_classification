@@ -21,6 +21,16 @@ from src.models.model import get_model
 
 
 def accuracy(target, pred):
+    '''
+    Returns the accuracy of a prediction.
+
+            Parameters:
+                    target (1d array): Array of true labels
+                    pred (1d array): Array of predicted labels
+
+            Returns:
+                    accuracy_score (float): The fraction of correctly classified samples
+    '''
     return metrics.accuracy_score(target, pred)
 
 def train(
@@ -31,15 +41,21 @@ def train(
     n_epochs: int, 
     device: torch.device,
 ):
-    """
+    '''
     The main training loop which will optimize a given model on a given dataset
-    :param model: The model being optimized
-    :param train_dl: The training dataset
-    :param optimizer: The optimizer used to update the model parameters
-    :param n_epochs: Number of epochs to train for
-    :param device: The device to train on
-    """
+    And saves the trained model as my_trained_model.pt in the tweet_classification bucket in the cloud
 
+            Parameters:
+                    model (nn.Module): The model being optimized
+                    train_dl (DataLoader): The training dataset
+                    optimizer (torch.optim.Optimizer): The optimizer used to update the model parameters
+                    n_epochs (int): Number of epochs to train for
+                    device (torch.device): The device to train on
+
+            Returns:
+                    losses (list): List of losses
+                    acc (list): List of accuracies 
+    '''
     # Keep track of the loss and best accuracy
     losses = []
     acc = []
@@ -50,7 +66,7 @@ def train(
         loss_epoch = []
 
         with tqdm(train_dl, unit="batch") as tepoch:
-            #Iterate through each batch in the dataloader
+            # Iterate through each batch in the dataloader
             for batch in train_dl:
                 tepoch.set_description(f"Epoch {ep}")
 
@@ -108,6 +124,22 @@ def train(
 @click.option("--epoch", default=1, help='Number of epoch use for training')
 @click.option("--batch_size", default=2, help='Batch size for training')
 def train_main(lr, epoch, batch_size):
+    '''
+    The main training function, with the following tasks:
+    Loading model and data
+    Tokenizing data
+    Setting the optimizer
+    Calling the train() function to train the model
+    Saving a figure of the loss and accuracy in the tweet_classification bucket in the cloud
+
+            Parameters:
+                    lr (float): The learning rate for the optimizer
+                    epoch (int): Number of epochs to train for
+                    batch_size (int): How many samples per batch to load with the DataLoader
+
+            Returns:
+                    Nothing
+    '''
     print("Training day and night")
     print(lr)
     print(epoch)
