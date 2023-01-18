@@ -37,8 +37,14 @@ predict: requirements
 	$(PYTHON_INTERPRETER) src/models/predict_model.py 
 	
 ## Predict tweet
-api: requirements
-	curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/'tweet_str -H 'accept: application/json'
+api: 
+	curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/'$(tweet) -H 'accept: application/json'
+
+## test
+do :
+    @echo "What is your age?: "; \
+    read AGE; \
+    echo "Your age is ", $$(AGE)
 
 # ## Make visualize
 # visualize: requirements
