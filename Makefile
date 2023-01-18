@@ -63,6 +63,9 @@ run_job_train: requirements
 run_job_inference: requirements
 	gcloud ai custom-jobs create --region=europe-west1 --display-name=inference-run --config=config_cpu_inference.yaml
 
+## Make deploy api
+deploy_api:requirements
+	gcloud run deploy tweet-classification-app --image gcr.io/braided-destiny-374308/$(PROJECT_NAME)/api:latest --platform managed --region europe-west1 --allow-unauthenticated
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
