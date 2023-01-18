@@ -20,3 +20,4 @@ gcsfs
 google
 fastapi
 google-cloud-storage
+uvicorn

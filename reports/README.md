@@ -57,7 +57,7 @@ end of the project.
 * [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
 * [x] Add a model file and a training script and get that running
 * [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
-* [ ] Remember to comply with good coding practices (`pep8`) while doing the project
+* [x] Remember to comply with good coding practices (`pep8`) while doing the project
 * [ ] Do a bit of code typing and remember to document essential parts of your code
 * [x] Setup version control for your data or part of your data
 * [x] Construct one or multiple docker files for your code
@@ -264,7 +264,7 @@ We attempted to make use of DVC, however it turned out to be unnecessary for our
 >
 > Answer:
 
-We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports, "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
+We have organized our CI into 3 separate files: "Auto linter" for sorting imports using isort, "Auto linter flake8" for organizing linebreaks and removing unused imports  (this was created but later removed due to errors created by it), "Install with cache" for unit testing as mentioned earlier. We have selected some unit testing being optional, mainly regarding data preparation. We have selected testing on 3 operating systems, namely windows, mac and linux. We selected these three because they cover majority of operating systems that are being used. This also covers the systems used by our team members. The python version we have selected to test on is only 3.9, since versions <3.9 were found to result in many conflicts with dvc and versions > 3.9 resulted in other incompatibilities with multiple dependencies. However multiple pytorch versions are being tested for which are 1.11.9, 1.12.0 and 1.13.0. We have selected multiple pytorch versions to test for since we are using models which highly depend on the input being in torch format thus we found it very important that our code can run in multiple pytorch versions. For the whole project we are using a lot of different libraries making the requirements list is very long thus we have selected using caching to reduce redundant installation time and improve efficiency.
 
 ## Running code and tracking experiments
 
@@ -388,7 +388,7 @@ We did set up a Compute Engine. The instance for the project had the following h
 - GPUs: 1 x NVIDIA V100
 But we did not make use of the engine, mainly because it is extremely expensive to run, and we didn't find a great need for it.
 
-Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model.
+Instead, we used other cloud services such as Vertex AI to train our model, and Cloud Functions to deploy an app with our prediction model. Hover this results in us not being able to utilize GPUs for the project and greatly increased the time spent. 
 
 ### Question 19
 
@@ -448,9 +448,8 @@ We then tried to deploy it with Cloud Functions, where we had a lot of issues wi
 >
 > Answer:
 
-Nope not yet...
-It could help in the long run to inform us about the behaviour of the model. Warn us if the data or the predictions started to become screwed for instance.
-
+We did not manage to implement monitoring of our deployed models; due to complications we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model need to be retrained or the model should be archived. The monitoring would a very important step in securing model’s relevance towards the data. 
+      
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**

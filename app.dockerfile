@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt requirements.txt
 COPY Makefile Makefile
 COPY setup.py setup.py
-COPY app/fastapi.py app/fastapi.py
+COPY app/fastapiapp.py app/fastapiapp.py
 
 
 RUN pip install -r requirements.txt --no-cache-dir
