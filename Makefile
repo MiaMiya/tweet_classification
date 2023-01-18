@@ -37,13 +37,12 @@ predict: requirements
 	$(PYTHON_INTERPRETER) src/models/predict_model.py 
 	
 ## Predict tweet str
-api: 
+api_str: 
 	curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/'$(tweet) -H 'accept: application/json'
 
 ## Predict tweet txt file
-api: 
+api_txt: 
 	curl -X 'POST' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/upload/' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'data=@$(txt);type=text/plain'
-
 
 ## test
 do :
@@ -72,15 +71,15 @@ do :
 # 	$(PYTHON_INTERPRETER) docker push gcr.io/braided-destiny-374308/$(PROJECT_NAME)
 
 ## Make run job train
-run_job_train: requirements
+run_job_train: 
 	gcloud ai custom-jobs create --region=$(REGION) --display-name=train-run --config=config_cpu_train.yaml
 
 ## Make run job test
-run_job_inference: requirements
+run_job_inference: 
 	gcloud ai custom-jobs create --region=$(REGION) --display-name=inference-run --config=config_cpu_inference.yaml
 
 ## Make deploy api
-deploy_api: requirements
+deploy_api: 
 	gcloud run deploy tweet-classification-app --region=$(REGION) --image gcr.io/braided-destiny-374308/$(PROJECT_NAME)/api:latest --platform managed --allow-unauthenticated --memory 8Gi --cpu 2
 ## Delete all compiled Python files
 clean:
