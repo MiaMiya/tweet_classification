@@ -112,9 +112,16 @@ class Tweets(Dataset):
 @click.argument("input_filepath", type=click.Path(exists=True))
 @click.argument("output_filepath", type=click.Path())
 def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
+    '''
+    Runs data processing scripts to turn raw data from (../raw) into cleaned data ready to be analyzed (saved in ../processed).
+
+            Parameters:
+                    input_filepath (str): The filepath to the raw data (data/raw)
+                    output_filepath (str): The filepath to where the preprocessed data should be saved (data/processed)
+
+            Returns:
+                    Nothing
+    '''
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
