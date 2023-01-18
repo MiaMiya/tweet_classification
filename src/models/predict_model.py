@@ -14,11 +14,7 @@ from src.data.helper import collate_fn, tokenize_function
 from src.models.model import get_model
 
 
-def predict(
-    model: nn.Module, 
-    test_dl: DataLoader, 
-    device: torch.device
-):
+def predict(model: nn.Module, test_dl: DataLoader, device: torch.device):
     """
     The main prediction loop which will optimize a given model on a given dataset
     :param model: The model being optimized
@@ -40,29 +36,35 @@ def predict(
 
             # Pass the inputs through the model, get the current loss and logits
             outputs = model(
-                input_ids=batch['input_ids'],
-                attention_mask=batch['attention_mask'])
+                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"]
+            )
 
-            log_probs = outputs.logits[0] ## input CR
+            log_probs = outputs.logits[0]  ## input CR
 
             if device == torch.cuda.is_available():
                 probs = log_probs.softmax(dim=-1).detach().cpu().flatten().numpy()
-            else: 
+            else:
                 probs = log_probs.softmax(dim=-1).detach().flatten().numpy()
-            
+
             probability.append(probs[0])
             prediction.append(probs[0] < 0.5)
-            
+
     return prediction, probability
 
+
 @click.command()
-@click.option("--model_checkpoint", default="/gcs/tweet_classification/my_trained_model.pt")
-@click.option("--data_to_predict", default="/gcs/tweet_classification/processed/test_processed.npy")
+@click.option(
+    "--model_checkpoint", default="/gcs/tweet_classification/my_trained_model.pt"
+)
+@click.option(
+    "--data_to_predict",
+    default="/gcs/tweet_classification/processed/test_processed.npy",
+)
 def predict_main(model_checkpoint, data_to_predict):
     print("Evaluating until hitting the ceiling")
     print(model_checkpoint)
-    
-    # Load model 
+
+    # Load model
     model = get_model()
     model.load_state_dict(torch.load(model_checkpoint))
 
@@ -76,31 +78,31 @@ def predict_main(model_checkpoint, data_to_predict):
     # Load data
     data_test = np.load(data_to_predict, allow_pickle=True)
 
-    data_set = Dataset.from_pandas(pd.DataFrame({'text':data_test[0,:], 'label':data_test[1,:]}))
+    data_set = Dataset.from_pandas(
+        pd.DataFrame({"text": data_test[0, :], "label": data_test[1, :]})
+    )
 
     # Process the data by tokenizing it
-    tokenized_dataset = data_set.map(tokenize_function, remove_columns=['text'])
+    tokenized_dataset = data_set.map(tokenize_function, remove_columns=["text"])
 
     trainloader = DataLoader(tokenized_dataset, collate_fn=collate_fn)
 
-    # Train the model 
-    prediction, probs = predict(
-    model, 
-    trainloader,
-    device)
+    # Train the model
+    prediction, probs = predict(model, trainloader, device)
 
     print("Predictions")
-    for index,pred in enumerate(prediction):
+    for index, pred in enumerate(prediction):
         print(
             f"tweet {index+1} predicted to be class {pred} with probability {probs[index]}"
         )
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+if __name__ == "__main__":
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
-    #project_dir = Path(__file__).resolve().parents[2]
+    # project_dir = Path(__file__).resolve().parents[2]
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
