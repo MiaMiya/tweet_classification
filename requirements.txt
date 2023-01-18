@@ -18,3 +18,5 @@ matplotlib
 pytest
 gcsfs
 google
+fastapi
+google-cloud-storage
