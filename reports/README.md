@@ -399,8 +399,8 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-#<img width="1004" alt="Skærmbillede 2023-01-18 kl  15 15 08" src="https://user-images.githubusercontent.com/117659231/213194100-4721ef43-fe49-4d4b-9ebf-5d45c9dd5b13.png">
-<img width="1012" alt="Skærmbillede 2023-01-18 kl  15 15 27" src="https://user-images.githubusercontent.com/117659231/213194159-db6312d7-4bdb-49e5-a15b-b1e9264918e8.png">
+![image](https://user-images.githubusercontent.com/117659231/213194100-4721ef43-fe49-4d4b-9ebf-5d45c9dd5b13.png)
+![image](https://user-images.githubusercontent.com/117659231/213194159-db6312d7-4bdb-49e5-a15b-b1e9264918e8.png)
 
 ### Question 20
 
@@ -409,7 +409,7 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-<img width="614" alt="Skærmbillede 2023-01-18 kl  15 15 56" src="https://user-images.githubusercontent.com/117659231/213194285-7220c51f-0c47-43b4-9f29-796066969cd1.png">
+![image](https://user-images.githubusercontent.com/117659231/213194285-7220c51f-0c47-43b4-9f29-796066969cd1.png)
 
 ### Question 21
 
@@ -418,7 +418,7 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-<img width="999" alt="Skærmbillede 2023-01-18 kl  15 16 59" src="https://user-images.githubusercontent.com/117659231/213194543-8d166f17-e742-4800-8170-9aee01a1bfff.png">
+![image](https://user-images.githubusercontent.com/117659231/213194543-8d166f17-e742-4800-8170-9aee01a1bfff.png)
 
 ### Question 22
 
