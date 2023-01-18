@@ -432,8 +432,7 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-We first tried to get a FastAPI app up and running locally, but among others due to our bad performing computers we were not able to run the model locally. 
-We then tried to deploy it with Cloud Functions, where we had a lot of issues with torch and loading the model correctly...
+We managed to deploy with both cloud functions and cloud runs. We initially deployed with cloud functions (because of technical issues see Q26). For the purpose of this project, it is well suited given the fact that our application only needs to take a string as input and then output a prediction. However, if we want to add more functionality it’s preferred to use containers and Cloud Run. This is precisely what we did and in order to invoke the service the user can either use the makefile (when in root repository) with make tweet=<some tweet> api or with curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/<some tweet>’ -H 'accept: application/json'
 
 ### Question 23
 
@@ -462,13 +461,13 @@ We did not manage to implement monitoring of our deployed models; due to complic
 >
 > Answer:
 
-We ended up using XXX (30) credits during the project. 
+We ended up using 24.64 credits during the project. 
 The credits were spent on the following services:
-- Cloud Build, 0.11 credits 
-- Cloud Storage, 16.83 credits
-- Compute Engine, 4.53 credits
+- Cloud Build, 0.52 credits 
+- Cloud Storage, 18.85 credits
+- Compute Engine, 4.68 credits
 - Networking, 0.17 credits
-- Vertex AI, 0.22 credits
+- Vertex AI, 0.41 credits
 Hence clearly Cloud Storage has cost the most. 
 
 ## Overall discussion of project
