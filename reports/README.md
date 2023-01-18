@@ -491,6 +491,12 @@ Hence clearly Cloud Storage has cost the most.
 > Answer:
 
 ![system_architecture](https://user-images.githubusercontent.com/117659231/213176803-237f51ec-26b9-41ec-9b82-efc5adcc7bc2.svg)
+As seen in the image above we are utilizing 14 services. 
+First of all on the right hand side is our local setup, where we start with the pytorch application as our hub. From there we create our virtual environment using conda with specific python version (3.9). 
+The next step is to create a cookiecutter code structure in order for us to have a clear overview and organized collection of code and documentation. This folder is then uploaded to github which ensures collaboration and version control. 
+For our data we first created a local data storage in the folder data (in cookie cutter structure). To create version control for our data we selected using the dvc service so that we can push and pull our data to cloud buckets. 
+The final service we are using locally is docker to containerize our project so it is reproducible.  
+For scalability and availability we established connections to the selected cloud services, google cloud platform. In other words, whenever we update our main branch in github it would automatic trigger a new build in cloud which is stored as images in the container registry. For user to interact with our deployed model we will be utilizing fastapi.   
 
 ### Question 26
 
