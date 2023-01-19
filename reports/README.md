@@ -449,7 +449,7 @@ We managed to deploy with both cloud functions and cloud runs. We initially depl
 >
 > Answer:
 
-We did not manage to implement monitoring of our deployed models; due to complications, we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or if the predictions started to become screwed. results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model needs to be retrained or if the model should be archived. The monitoring would be a very important step in securing the model’s relevance to the data. 
+We did not manage to implement monitoring of our deployed models; due to complications, we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or if the predictions started to become screwed. Results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model needs to be retrained or if the model should be archived. The monitoring would be a very important step in securing the model’s relevance to the data. 
       
 ### Question 24
 
@@ -470,6 +470,7 @@ The credits were spent on the following services:
 - Compute Engine, 4.68 credits
 - Networking, 0.17 credits
 - Vertex AI, 0.41 credits
+
 Hence clearly Cloud Storage has cost the most. 
 
 ## Overall discussion of project
