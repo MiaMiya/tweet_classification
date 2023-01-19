@@ -283,7 +283,7 @@ We have organized our CI into 3 separate files: "Auto linter" for sorting import
 >
 > Answer:
 
-We implemented click commands for inputting optional arguments for configuring the hyperparameters. For example, for training our model we can input different learning rate, number of epochs, and batch size that works in the following way: python train_model --lr 1e-3 --epoch 10 --batch_size 64. This saves us time from having to change all the hyperparameter values manually everywhere in the code compared to if they were all implemented directly in functions. 
+We implemented click commands for inputting optional arguments for configuring the hyperparameters. For example, for training our model we can input different learning rate, number of epochs, and batch size that works in the following way: `python train_model --lr 1e-3 --epoch 10 --batch_size 64`. This saves us time from having to change all the hyperparameter values manually everywhere in the code compared to if they were all implemented directly in functions. 
 
 ### Question 13
 
