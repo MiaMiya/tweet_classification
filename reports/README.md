@@ -449,7 +449,7 @@ We managed to deploy with both cloud functions and cloud runs. We initially depl
 >
 > Answer:
 
-We did not manage to implement monitoring of our deployed models; due to complications, we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there were data drift, or if the predictions started to become screwed. Results in us not being able to utilize GPUs for the project and greatly increased the time. Furthermore, this would help inform us if the model needs to be retrained or if the model should be archived. The monitoring would be a very important step in securing the model’s relevance to the data. 
+We did not manage to implement monitoring of our deployed models; due to complications, we had when deploying our model. We would have wanted to implement monitoring, which could help inform us about the behavior of our model in the long run. It would warn us if there was data drift, or if the predictions would start to become screwed. Furthermore, this would help inform us if the model needs to be retrained or if the model should be archived. The monitoring would be a very important step in securing the model’s relevance to the data. In our case, though given Trump doesn't use Twitter anymore no new data will be generated, and thus until he starts generating new tweets monitoring is less relevant.
       
 ### Question 24
 
