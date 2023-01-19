@@ -169,7 +169,7 @@ To obtain the data used for the project the command `dvc pull` will be used, whi
 > *experiments.*
 > Answer:
 
-We did use the cookiecutter template to structure our code. From the cookiecutter template, we have used selected premade folders src, report and models. Then we added a .dvc folder to handle data storage and version control. Furthermore, we added a tests folder to include all the unit tests for our code. Besides that, we customized the makefile and requirements.txt files. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilize the google cloud platform we added 3 configuration files and two dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
+We did use the cookiecutter template to structure our code. From the cookiecutter template, we have used selected premade folders src, report and models. Then we added a .dvc folder to handle data storage and version control. Furthermore, we added a tests folder to include all the unit tests for our code. Besides that, we customized the makefile and requirements.txt files. And the readme file was edited such that it contained a detailed description of our project. And as we plan to utilize the google cloud platform we added 3 configuration files and 3 dockerfiles. Furthermore, we have added a .github/workflows folder for CI. 
 
 ### Question 6
 
