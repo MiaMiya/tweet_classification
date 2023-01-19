@@ -365,7 +365,6 @@ The debugging method was dependent on each group member, but the majority of the
 > Answer:
 
 We used the following services:
-- Compute Engine. To train and host our model on a virtual machine.
 - Bucket. To store our data and models in the cloud.
 - Cloud Build (with Triggers). To automatically create new images, when the GitHub repository changes were pushed.
 - Container Registry. To store our images and containers.
