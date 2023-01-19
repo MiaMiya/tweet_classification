@@ -129,7 +129,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
-We used the framework Transformers, to train an NLP classifier. The goal of the classifier was to classify tweets whether the author is Donald Trump or a Russian troll account. From the framework we used the two functions `AutoTokenizer` and `AutoModelForSequenceClassification` to do respectively tokenization and classification. Both functions are based on the pre-trained model [bert-base-uncased](https://huggingface.co/bert-base-uncased) from Huggingface. This is an English base BERT model, trained on a large English corpus of raw text, hence without any human labeling. It's uncased, meaning the model sees no difference between uppercase and lowercase letters. The classification task in our project was done with two labels, whether the selected tweet came from Donald Trump or a Russian Troll.
+We used the framework Transformers, to train an NLP classifier. The goal of the classifier was to classify tweets whether the author is Donald Trump or a Russian troll account. From the framework, we used the two functions `AutoTokenizer` and `AutoModelForSequenceClassification` to do respectively tokenization and classification. Both functions are based on the pre-trained model [bert-base-uncased](https://huggingface.co/bert-base-uncased) from Huggingface. This is an English base BERT model, trained on a large English corpus of raw text, hence without any human labeling. It's uncased, meaning the model sees no difference between uppercase and lowercase letters. The classification task in our project was done with two labels, whether the selected tweet came from Donald Trump or a Russian Troll.
 
 ## Coding environment
 
