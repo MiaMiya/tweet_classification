@@ -332,7 +332,7 @@ Due to time constraints and the complexity of our model, we have selected not to
 >
 > Answer:
 
-For our project, we developed three images: one for training, one for inference, and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud every time we pushed changes to our repository. At times we did though disable the trigger to not run out of resources. Hence only building new docker images when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris.
+For our project, we developed three images: one for training, one for inference, and one for deployment. This is done so by adding three docker builds and pushes in the cloudbuild.yaml file with different tags and creating three separate dockerfiles with different entry points. The docker images are set to build automatically using a trigger in Google Cloud every time we pushed changes to our repository. At times we did though disable the trigger to not run out of resources. Hence only building new docker images when we found it necessary. To run the docker images as custom jobs in vertex AI we created separate config files indicating different imageUris. Link to app dockerfile: https://github.com/MiaMiya/tweet_classification/blob/main/app.dockerfile
       
 ### Question 16
 
