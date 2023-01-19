@@ -512,10 +512,11 @@ For scalability and availability, we established connections to the selected clo
 >
 > Answer:
 
-We had several challenges.
-One of the biggest challenges was our older slow computers with too little memory and RAM to run the scripts. Luckily we had one good enough computer, where we could run stuff locally. Eventually, we had to solve this challenge by uploading to the google cloud storage and testing there without having tested locally. This worked out but took a significantly longer time. 
-Another issue was that we had difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be that dvc saves the data in uncomprehensive path names thus proving to be almost impossible to define a proper file path. Therefore, we had to decide on doing a quick fix by uploading the data manually to cloud buckets to get the models up and running. But it is to note that this would lead to no data version control which is a great limitation to our project. 
-Another big challenge was that we could not utilize GPU resources on the cloud due to resource limitations for the scope of the course. And unfortunately, we are using transformers models which are known to be very large and time-consuming to fine-tune. This resulted in an extremely long training time with an even significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 data points. 
+We had several challenges. One of the biggest challenges was our old and slow computers which didn't have enough storage or RAM to run the scripts. Luckily we had one computer that was sufficient, where we could run stuff locally. Eventually, we solved this challenge by uploading and running on the google services and testing there without having tested locally. This worked out but took significantly longer to do, as each build takes over 20mins. 
+
+Another issue we had, was difficulties figuring out the right path to access our data stored in cloud buckets. This turned out to be because dvc saves the data in uncomprehensive path names thus making it almost impossible to define a proper file path. Therefore, we had to decide on doing a quick fix by uploading the data manually to cloud buckets to get the models up and running. But it is of note that this leads to no data version control which is an inconvenient limitation to our project. 
+
+Another big challenge was that we could not utilize GPU resources on the Vertex AI training service due to resource limitations. Unfortunately, we use transformers models which are known to be very large and time-consuming to use and fine-tune. This resulted in an extremely long training time even with a significantly reduced dataset size. To give an example, it took about 30 minutes just to train 1 epoch with 750 data points.
 
 ### Question 27
 
