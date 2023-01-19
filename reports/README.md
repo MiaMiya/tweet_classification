@@ -129,7 +129,7 @@ s174479, s175393, s183909, s183998
 >
 > Answer:
 
-We used the framework Transformers, to train an NLP classifier. The goal of the classifier was to classify tweets whether the author is Donald Trump or a Russian troll account. From the framework we used the two functions `AutoTokenizer` and `AutoModelForSequenceClassification` to do respectively tokenization and classification. Both functions are based on the pre-trained model [bert-base-uncased](https://huggingface.co/bert-base-uncased) from Huggingface. This is an English base BERT model, trained on a large English corpus of raw text, hence without any human labeling. It's uncased, meaning the model sees no difference between uppercase and lowercase letters. The classification task in our project was done with two labels, whether the selected tweet came from Donald Trump or a Russian Troll.
+We used the framework Transformers, to train an NLP classifier. The goal of the classifier was to classify tweets whether the author is Donald Trump or a Russian troll account. From the framework, we used the two functions `AutoTokenizer` and `AutoModelForSequenceClassification` to do respectively tokenization and classification. Both functions are based on the pre-trained model [bert-base-uncased](https://huggingface.co/bert-base-uncased) from Huggingface. This is an English base BERT model, trained on a large English corpus of raw text, hence without any human labeling. It's uncased, meaning the model sees no difference between uppercase and lowercase letters. The classification task in our project was done with two labels, whether the selected tweet came from Donald Trump or a Russian Troll.
 
 ## Coding environment
 
@@ -434,7 +434,7 @@ Instead, we used other cloud services such as Vertex AI to train our model, and 
 >
 > Answer:
 
-We managed to deploy with both cloud functions and cloud runs. We initially deployed with cloud functions (because of technical issues see Q26). For the purpose of this project, it is well suited given the fact that our application only needs to take a string as input and then output a prediction. However, if we want to add more functionality it’s preferred to use containers and Cloud Run. This is precisely what we did and to invoke the service the user can either use the makefile (when in root repository) with make tweet=<some tweet> api or with curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/<some tweet>’ -H 'accept: application/json'
+We managed to deploy with both cloud functions and cloud runs. We initially deployed with cloud functions (because of technical issues see Q26). For the purpose of this project, it is well suited given the fact that our application only needs to take a string as input and then output a prediction. However, if we want to add more functionality it’s preferred to use containers and Cloud Run. This is precisely what we did and to invoke the service the user can either use the makefile (when in root repository) with make tweet=<some tweet> api_str or with curl -X 'GET' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/tweet/<some tweet>’ -H 'accept: application/json'. Alternatively you can also upload a txt file instaed with: with make txt=<file.txt> api_txt or with curl -X 'POST' 'https://tweet-classification-app-ed4ieygz7a-ew.a.run.app/upload/' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'data=@<file.txt>;type=text/plain'
 
 ### Question 23
 
